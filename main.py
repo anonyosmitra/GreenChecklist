@@ -26,7 +26,7 @@ con=dbh.Connect()
 tabs=["Mregion","Mstate","Mcity"]
 for i in tabs:
     con.runSql("delete from %s"%(i))
-    con.runSql("alter table %s AUTO_INCREMENT=1")
+    con.runSql("alter table %s AUTO_INCREMENT=1"%(i))
 for i in Regions:
     regionKey[i["sn"]]=con.insertIntoTable("Mregion",{"regionName":i["name"],"regionSName":i["sn"],"countryId":India},returnId=True)
 for i in state:
