@@ -161,7 +161,7 @@ def desc(table, selcol=["name", "type", "null", "key", "default", "extra"], db=d
 
 class Connect:
 	def __init__(self, db=defaultdb):
-		self.d = mysql.connect(endpoint, user=user, port=port, passwd=passwd, db=appendQuery("%0",[db]))
+		self.d = mysql.connect(endpoint, user=user, port=port, passwd=passwd, db=db)
 		self.c = self.d.cursor()
 
 	def desc(self, tab, selcol=["name", "type", "null", "key", "default", "extra"]):
