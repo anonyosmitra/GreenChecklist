@@ -17,10 +17,14 @@ def sortdicts(data,sortby):
 cont=sortdicts(cont,"Name")
 contKeys={}
 con=dbh.Connect()
+con.deleteFromTable("Mcountry")
+con.deleteFromTable("Mcontinent")
+con.runSql("alter table Mcontinent AUTO_INCREMENT=1")
+con.runSql("alter table Mcountry AUTO_INCREMENT=1")
 for i in cont:
     contKeys[i["Code"]]=con.insertIntoTable("Mcontinent",{"continentName":i["Name"],"continentCode":i["Code"]},returnId=True)
 for i in countries:
-    ex=con.getTable("Mountry",["id"],{"countryCode":i["Three_Letter_Country_Code"]})
+    ex=con.getTable("Mcountry",["id"],{"countryCode":i["Three_Letter_Country_Code"]})
     if len(ex)==0:
         con.insertIntoTable("Mcountry",{"countryName":i["Country_Name"].split(",")[0],"countryCode":i["Three_Letter_Country_Code"],"continentId":contKeys[i["Continent_Code"]]})
 con.close()
