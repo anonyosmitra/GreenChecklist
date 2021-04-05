@@ -69,6 +69,7 @@ function onEnter(arg)
 {
     console.log(arg)
     var div = document.getElementById(arg["div"]);
+
 	div.addEventListener("keyup", function(event) {
  	event.preventDefault();
  	if (event.keyCode === 13) {

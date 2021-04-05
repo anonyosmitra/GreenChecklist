@@ -18,7 +18,7 @@ keys=table keys
         var cache={};
         cache["keys"]=[];
         {%for i in keys%}
-        cache["keys"]+=["{{i}}"]
+        cache["keys"][cache["keys"].length]="{{i}}"
         {%endfor%}
         cache["tabName"]="{{sel}}";
         function init_enters(){
