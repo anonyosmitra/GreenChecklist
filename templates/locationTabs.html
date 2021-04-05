@@ -16,7 +16,7 @@ keys=table keys
     <script onload="tabsPage_init()" src="{{url_for('static', filename='js/tabsPage.js')}}"></script>
     <script>
         var cache={};
-        cache[keys]=[];
+        cache["keys"]=[];
         {%for i in keys%}
         cache["keys"]+=["{{i}}"]
         {%endfor%}
