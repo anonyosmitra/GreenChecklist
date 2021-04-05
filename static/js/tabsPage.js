@@ -15,10 +15,8 @@ var getApp = new XMLHttpRequest();
 	{
 	if(keyInJson('exe',data))
 		{
-		    console.log("exes")
 			for(var i=0;i<data['exe'].length;i++)
 			{
-			    console.log(data['exe'][i]["method"]);
 				methods[data['exe'][i]["method"]](data['exe'][i]['arg']);
 			}
 			}}
