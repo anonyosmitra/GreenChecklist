@@ -1,3 +1,6 @@
+body{
+background-color: #f2f2f2;
+}
 .tabButton{
 	font-size: 16px;
     width:fit-content;
@@ -9,7 +12,6 @@
     background-color: #808080;
     font-weight: bold;
 }
-
 .highlight{
 	background-color: #003d99;
 }
@@ -18,6 +20,8 @@
     border-width: thin;
     border-style: solid;
     margin: 5px;
+    border-color: #bfbfbf;
+    background-color: #ffffff;
 }
 div.mainSearchBox {
     width: 400px;
@@ -31,6 +35,9 @@ input.mainSearchBox {
     width: 100%;
     height: 30px;
     font-size:20px;
+    border:solid;
+    border-width:thin;
+    border-color:#bfbfbf;
 }
 
 .clearButt {
@@ -48,4 +55,29 @@ input.mainSearchBox {
     cursor: pointer;
     color: white;
     background-color: #808080;
+}
+#tabEntries {
+  border-collapse: collapse;
+  margin: 10px;
+  text-align: center;
+}
+
+#tabEntries td, #tabEntries th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+#tabEntries tr:nth-child(even){background-color: #f2f2f2;}
+
+#tabEntries tr:hover {background-color: #ddd;}
+#tabEntries input{width:90%;border:none;outline: none;}
+#tabEntries input:hover {background-color: #ddd;}
+
+#tabEntries th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #003d99;
+  color: white;
+  text-align: center;
 }
