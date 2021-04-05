@@ -5,10 +5,8 @@ function tabsPage_init(){
 }
 function tabsPage_openTab(tabName){
     tabs=["Country","State","City"];
-    if(tabName in tabs && tabName!=cache["tabName"])
+    if((tabName in tabs)&&(tabName!=cache["tabName"]))
         POST({"tab":tabName},"openTab")
-    else
-    console.log("error")
 }
 var getApp = new XMLHttpRequest();
     getApp.onreadystatechange = function () {
