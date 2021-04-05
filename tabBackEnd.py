@@ -27,7 +27,5 @@ def getCountryTab(id=None,query={}):
 					q[i]=query
 				query=q
 			qr=makeWhereQuery(query,cols)
-		con=dbh.Connect()
-		data=con.getTable("Mcountry,Mcontinent",cols,qr,join={"continentId":"Mcontinent.id"})
-		con.close()
+		data=dbh.getTable("Mcountry,Mcontinent",cols,qr,join={"continentId":"Mcontinent.id"})
 		return({"data":data,"cols":["Country Name","Country Code","Continent Name","Continent Code"],"keys":cols})
