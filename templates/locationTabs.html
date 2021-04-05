@@ -3,6 +3,7 @@ Variables:
 html=table
 sel=selected tab name(Country/State/City)
 keys=table keys
+keysStr= str(keys)
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -16,8 +17,8 @@ keys=table keys
     <script onload="tabsPage_init()" src="{{url_for('static', filename='js/tabsPage.js')}}"></script>
     <script>
         var cache={};
-        cache[keys]={{keys}};
-        cache["tabName"]={{sel}};
+        cache[keys]={{keysStr}};
+        cache["tabName"]="{{sel}}";
         function init_enters(){
         for(i in cache["keys"])
         onEnter({"div":"search_"+cache["keys"][i],"fun":"search","arg":cache["keys"][i]})
