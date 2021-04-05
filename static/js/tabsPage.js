@@ -89,3 +89,12 @@ function POST(data,route="")
 		getApp.setRequestHeader("Content-Type","application/json;charset=UTF-8");
 		getApp.send(JSON.stringify(data))
 	}
+function keyInJson(k,json)
+	{
+		for(var i in json)
+		{
+		    if(i===k)
+				return(true);
+			}
+			return(false);
+		}
