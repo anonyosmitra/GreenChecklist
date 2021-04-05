@@ -1,0 +1,15 @@
+.tabButton{
+    font-size: 16px;
+    width:fit-content;
+    margin: 5px;
+    margin-bottom: 0px !important;
+    padding: 5px;
+    display: inline-block;
+    color: #FFFFFF;
+    background-color: #808080;
+    font-weight: bold;
+    cursor: pointer;
+}
+.highlight{
+    background-color: #003d99;
+}

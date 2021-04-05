@@ -1,0 +1,22 @@
+<!--
+Variables:
+html=table
+sel=selected tab name(Country/State/City)
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/tabsPage.css')}}">
+    <script onload="tabsPage_init()" src="{{url_for('static', filename='js/tabsPage.js')}}"></script>
+</head>
+<body>
+    {%set tabs=["Country","State","City"]%}
+    {%for i in tabs%}
+    <div class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab(\'{{i}}\')">{{i}}</div>
+    {%endfor%}
+</body>
+</html>

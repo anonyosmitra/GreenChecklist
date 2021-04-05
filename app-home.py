@@ -15,7 +15,7 @@ CORS(app)
 
 @app.route('/', methods=['GET'])
 def home():
-	return("<h1>HELLO WORLD!</h1>")
+	return render_template("locationTabs.html",sel="Country")
 
 if __name__ == '__main__':
     app.secret_key = 'password'
