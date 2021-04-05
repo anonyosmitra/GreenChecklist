@@ -5,6 +5,7 @@ function tabsPage_init(){
 }
 function tabsPage_openTab(tabName){
     tabs=["Country","State","City"];
+    console.log(tabName)
     if((tabName in tabs)&&(tabName!=cache["tabName"]))
         POST({"tab":tabName},"openTab")
 }
