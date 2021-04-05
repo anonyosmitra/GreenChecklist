@@ -24,7 +24,7 @@ def home():
 def search():
 	data = request.json
 	tab=getTab[data["tab"]](query=data["query"])
-	return (jsonify({"reply": {"auth": 1, "exe":[{"method":"fillTable","arg":render_template("tabTemp.html",columns=tab["cols"],keys=tab["keys"],data=tab["data"])},{"method":"makeOnEnters","arg":data["keys"]}]}}))
+	return (jsonify({"reply": {"auth": 1, "exe":[{"method":"fillTable","arg":render_template("tabTemp.html",columns=tab["cols"],keys=tab["keys"],data=tab["data"])},{"method":"makeOnEnters","arg":tab["keys"]}]}}))
 
 
 if __name__ == '__main__':

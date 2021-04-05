@@ -67,7 +67,6 @@ function makeOnEnters(args){
 }
 function onEnter(arg)
 {
-    console.log(arg)
     var div = document.getElementById(arg["div"]);
 
 	div.addEventListener("keyup", function(event) {
