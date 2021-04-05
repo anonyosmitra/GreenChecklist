@@ -6,7 +6,7 @@ function tabsPage_init(){
 function tabsPage_openTab(tabName){
     tabs=["Country","State","City"];
     console.log(tabName)
-    if((tabName in tabs)&&(tabName!=cache["tabName"]))
+    if((tabs.includes(tabName))&&(tabName!=cache["tabName"]))
         POST({"tab":tabName},"openTab")
 }
 var getApp = new XMLHttpRequest();
@@ -33,7 +33,7 @@ var methods={}
 function selTab(args)
 {
     tabs=["Country","State","City"];
- if(args in tabs)
+ if(tabs.includes(args))
  {
     for(i in tabs)
         document.getElementById("tab_"+tabs[i]).style="tabButton";
@@ -50,7 +50,7 @@ function search(args=null)
     if(args==null)
         query=document.getElementById("mainSearchBox").value;
     else
-        if(args in cache["keys"])
+        if(cache["keys"].includes(args))
             query[args]=document.getElementById("search_"+args).value;
     if(query!={})
         POST({"tab":cache["tabName"],"query":query},"search")
