@@ -38,9 +38,8 @@ function selTab(args)
     for(i in tabs)
         document.getElementById("tab_"+tabs[i]).class="tabButton";
     document.getElementById("tab_"+args).class="tabButton highlight";
+    cache["tabName"]=args
  }
- else
- console.log("error")
 }
 function fillTable(args)
 {
