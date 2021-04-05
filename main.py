@@ -34,7 +34,3 @@ for i in state:
 for i in cityList:
     con.insertIntoTable("Mcity",{"cityName":i["name"],"citySName":i["sn"],"countryId":India,"regionId":regionKey[i["region"]],"stateId":stateKey[i["state"]],"timezone":tz})
 con.close()
-
-
-#import dbHandler as dbh
-
