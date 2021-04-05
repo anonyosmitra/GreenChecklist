@@ -10,13 +10,20 @@ sel=selected tab name(Country/State/City)
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{url_for('static', filename='css/tabsPage.css')}}" rel="stylesheet">
     <script onload="tabsPage_init()" src="{{url_for('static', filename='js/tabsPage.js')}}"></script>
 </head>
 <body>
     {%set tabs=["Country","State","City"]%}
     {%for i in tabs%}
-    <div class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab(\'{{i}}\')">{{i}}</div>
+    <div class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab('{{i}}')">{{i}}</div>
     {%endfor%}
+<div class="resultTab">
+ <div class="mainSearchBox">
+        <input class="mainSearchBox">
+        <button class="clearButt" id="clear">✕</button>
+    </div><i class="fa fa-search tabButton highlight" onclick="search()"></i>
+</div>
 </body>
 </html>
