@@ -16,7 +16,7 @@ def makeWhereQuery(query,cols=None,gate="or"):
 			qr=qr[:-(len(gate) + 2)]
 		return qr
 
-def getCountryTab(id="",query={}):
+def getCountryTab(id=None,query={}):
 	cols = ["countryName","countryCode","continentName","continentCode"]
 	if id==None:
 		qr=""
@@ -28,5 +28,4 @@ def getCountryTab(id="",query={}):
 				query=q
 			qr=makeWhereQuery(query,cols)
 		data=dbh.getTable("Mcountry,Mcontinent",cols,qr,join={"continentId":"Mcontinent.id"})
-		print(data)
 		return({"data":data,"cols":["Country Name","Country Code","Continent Name","Continent Code"],"keys":cols})
