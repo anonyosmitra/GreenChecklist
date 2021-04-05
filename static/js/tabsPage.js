@@ -5,7 +5,6 @@ function tabsPage_init(){
 }
 function tabsPage_openTab(tabName){
     tabs=["Country","State","City"];
-    console.log(tabName)
     if((tabs.includes(tabName))&&(tabName!=cache["tabName"]))
         POST({"tab":tabName},"openTab")
 }
@@ -35,10 +34,13 @@ function selTab(args)
     tabs=["Country","State","City"];
  if(tabs.includes(args))
  {
+
     for(i in tabs)
-        document.getElementById("tab_"+tabs[i]).style="tabButton";
-    document.getElementById("tab_"+args).style="tabButton highlight";
+        document.getElementById("tab_"+tabs[i]).class="tabButton";
+    document.getElementById("tab_"+args).class="tabButton highlight";
  }
+ else
+ console.log("error")
 }
 function fillTable(args)
 {
