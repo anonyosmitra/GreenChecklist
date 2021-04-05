@@ -17,7 +17,6 @@ CORS(app)
 @app.route('/', methods=['GET'])
 def home():
 	data=getTab["Country"]()
-	print(data)
 	tab=render_template("tabTemp.html",columns=data["cols"],keys=data["keys"],data=data["data"])
 	return render_template("locationTabs.html",sel="Country",html=tab,keys=data["keys"])
 @app.route('/search', methods=['POST'])
