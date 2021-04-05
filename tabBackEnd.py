@@ -17,8 +17,8 @@ def makeWhereQuery(query,cols=None,gate="or"):
 		return qr
 
 def getCountryTab(id=None,query={}):
-	cols = ["countryName","countryCode","continentName","continentCode"]
 	if id==None:
+		cols = ["countryName", "countryCode", "continentName", "continentCode"]
 		qr=""
 		if query!={}:
 			if type(query)==str:
@@ -28,4 +28,35 @@ def getCountryTab(id=None,query={}):
 				query=q
 			qr=makeWhereQuery(query,cols)
 		data=dbh.getTable("Mcountry,Mcontinent",cols,qr,join={"continentId":"Mcontinent.id"},ext="order by countryName")
-		return({"data":data,"cols":["Country Name","Country Code","Continent Name","Continent Code"],"keys":cols})
+		return({"data":data,"cols":["Country","Country Code","Continent","Continent Code"],"keys":cols})
+
+
+def getStateTab(id=None,query={}):
+	if id==None:
+		cols = ["stateName","stateSName", "countryName", "continentName"]
+		qr=""
+		if query!={}:
+			if type(query)==str:
+				q={}
+				for i in cols:
+					q[i]=query
+				query=q
+			qr=makeWhereQuery(query,cols)
+		data=dbh.getTable("Mstate,Mcountry,Mcontinent",cols,qr,join={"countryId":"Mcountry.id","continentId":"Mcontinent.id"},ext="order by stateName")
+		return({"data":data,"cols":["State","Abbr", "Country", "Continent"],"keys":cols})
+
+
+
+def getCityTab(id=None,query={}):
+	if id==None:
+		cols = ["cityName","citySName","stateName", "countryName", "continentName"]
+		qr=""
+		if query!={}:
+			if type(query)==str:
+				q={}
+				for i in cols:
+					q[i]=query
+				query=q
+			qr=makeWhereQuery(query,cols)
+		data=dbh.getTable("Mcity,Mstate,Mcountry,Mcontinent",cols,qr,join={"stateId":"Mstate.id","countryId":"Mcountry.id","continentId":"Mcontinent.id"},ext="order by cityName")
+		return({"data":data,"cols":["City", "Abbr", "State", "Country", "Continent"],"keys":cols})

@@ -2,6 +2,7 @@
 Variables:
 html=table
 sel=selected tab name(Country/State/City)
+keys=table keys
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -13,16 +14,25 @@ sel=selected tab name(Country/State/City)
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{url_for('static', filename='css/tabsPage.css')}}" rel="stylesheet">
     <script onload="tabsPage_init()" src="{{url_for('static', filename='js/tabsPage.js')}}"></script>
+    <script>
+        var cache={};
+        cache[keys]={{keys}};
+        cache["tabName"]={{sel}};
+        function init_enters(){
+        for(i in cache["keys"])
+        onEnter({"div":"search_"+cache["keys"][i],"fun":"search","arg":cache["keys"][i]})
+        }
+    </script>
 </head>
 <body>
     {%set tabs=["Country","State","City"]%}
     {%for i in tabs%}
-    <div class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab('{{i}}')">{{i}}</div>
+    <div id="tab_{{i}}" class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab('{{i}}')">{{i}}</div>
     {%endfor%}
 <div class="resultTab">
  <div class="mainSearchBox">
-        <input class="mainSearchBox">
-        <button class="clearButt" id="clear">✕</button>
+        <input class="mainSearchBox" id="mainSearchBox">
+        <button class="clearButt" id="clear" hidden>✕</button>
     </div><i class="fa fa-search tabButton highlight" onclick="search()"></i>
     <table id="tabEntries">
         {{html|safe}}
