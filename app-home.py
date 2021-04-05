@@ -8,7 +8,7 @@ import dbHandler as dbh
 import os
 import requests
 import timezone as tz
-import websocket,ssl,socket
+import ssl,socket
 
 application = app = Flask(__name__)
 CORS(app)
