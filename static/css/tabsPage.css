@@ -1,5 +1,5 @@
 .tabButton{
-    font-size: 16px;
+	font-size: 16px;
     width:fit-content;
     margin: 5px;
     margin-bottom: 0px !important;
@@ -8,10 +8,10 @@
     color: #FFFFFF;
     background-color: #808080;
     font-weight: bold;
-    cursor: pointer;
 }
+
 .highlight{
-    background-color: #003d99;
+	background-color: #003d99;
 }
 .resultTab{
 	padding:5px;
