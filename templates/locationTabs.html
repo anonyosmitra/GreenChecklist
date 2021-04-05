@@ -3,7 +3,6 @@ Variables:
 html=table
 sel=selected tab name(Country/State/City)
 keys=table keys
-keysStr= str(keys)
 -->
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +16,10 @@ keysStr= str(keys)
     <script onload="tabsPage_init()" src="{{url_for('static', filename='js/tabsPage.js')}}"></script>
     <script>
         var cache={};
-        cache[keys]={{keysStr}};
+        cache[keys]=[];
+        {%for i in keys%}
+        cache["keys"]+=["{{i}}"]
+        {%endfor%}
         cache["tabName"]="{{sel}}";
         function init_enters(){
         for(i in cache["keys"])
