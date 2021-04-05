@@ -13,13 +13,13 @@ var getApp = new XMLHttpRequest();
 	console.log(data);
 	if(data["auth"]===1)
 	{
-	if(keyInJson('exe',data["reply"]))
+	if(keyInJson('exe',data))
 		{
 		    console.log("exes")
-			for(var i=0;i<data["reply"]['exe'].length;i++)
+			for(var i=0;i<data['exe'].length;i++)
 			{
-			    console.log(data["reply"]['exe'][i]["method"]);
-				methods[data["reply"]['exe'][i]["method"]](data["reply"]['exe'][i]['arg']);
+			    console.log(data['exe'][i]["method"]);
+				methods[data['exe'][i]["method"]](data['exe'][i]['arg']);
 			}
 			}}
 
