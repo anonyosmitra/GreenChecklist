@@ -13,7 +13,7 @@ keys=table keys
 	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="{{url_for('static', filename='css/tabsPage.css')}}" rel="stylesheet">
-    <script onload="tabsPage_init()" src="{{url_for('static', filename='js/tabsPage.js')}}"></script>
+    <script src="{{url_for('static', filename='js/tabsPage.js')}}"></script>
     <script>
         var cache={};
         cache["keys"]=[];
@@ -27,7 +27,7 @@ keys=table keys
         }
     </script>
 </head>
-<body>
+<body onload="tabsPage_init()" >
     {%set tabs=["Country","State","City"]%}
     {%for i in tabs%}
     <div id="tab_{{i}}" class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab('{{i}}')">{{i}}</div>
