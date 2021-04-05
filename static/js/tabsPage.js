@@ -17,6 +17,7 @@ var getApp = new XMLHttpRequest();
 		{
 			for(var i=0;i<data["reply"]['exe'].length;i++)
 			{
+			    console.log(data["reply"]['exe'][i]["method"]);
 				methods[data["reply"]['exe'][i]["method"]](data["reply"]['exe'][i]['arg']);
 			}
 			}}
