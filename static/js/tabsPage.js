@@ -36,8 +36,8 @@ function selTab(args)
  {
 
     for(i in tabs)
-        document.getElementById("tab_"+tabs[i]).class="tabButton";
-    document.getElementById("tab_"+args).class="tabButton highlight";
+        document.getElementById("tab_"+tabs[i]).classList.remove('highlight');
+    document.getElementById("tab_"+args).classList.add('highlight');
     cache["tabName"]=args
  }
 }
