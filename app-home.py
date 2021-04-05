@@ -5,7 +5,6 @@ from flask_cors import CORS
 
 import arraylizer as arr
 import dbHandler as dbh
-import hk
 import os
 import requests
 import timezone as tz
