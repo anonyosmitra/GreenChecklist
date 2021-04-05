@@ -24,7 +24,11 @@ def search():
 	data = request.json
 	tab=getTab[data["tab"]](query=data["query"])
 	return (jsonify({"reply": {"auth": 1, "exe":[{"method":"fillTable","arg":render_template("tabTemp.html",columns=tab["cols"],keys=tab["keys"],data=tab["data"])},{"method":"makeOnEnters","arg":tab["keys"]}]}}))
-
+@app.route('/openTab', methods=['POST'])
+def openTab():
+	tabName = request.json["tab"]
+	tab= getTab[tabName]()
+	return (jsonify({"reply": {"auth": 1, "exe":[{"method":"fillTable","arg":render_template("tabTemp.html",columns=tab["cols"],keys=tab["keys"],data=tab["data"])},{"method":"makeOnEnters","arg":tab["keys"]},{"method":"selTab","arg":tabName}]}}))
 
 if __name__ == '__main__':
     app.secret_key = 'password'

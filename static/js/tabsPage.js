@@ -4,7 +4,9 @@ function tabsPage_init(){
     console.log("tabsPage.js loaded.")
 }
 function tabsPage_openTab(tabName){
-    console.log(tabName);
+    tabs=["Country","State","City"];
+    if(tabName in tabs && tabName!=cache["tabName"])
+        POST({"tab":tabName},"openTab")
 }
 var getApp = new XMLHttpRequest();
     getApp.onreadystatechange = function () {
