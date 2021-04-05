@@ -67,6 +67,7 @@ function makeOnEnters(args){
 }
 function onEnter(arg)
 {
+    console.log(args)
     var div = document.getElementById(arg["div"]);
 	div.addEventListener("keyup", function(event) {
  	event.preventDefault();
