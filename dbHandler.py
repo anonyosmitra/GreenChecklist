@@ -1,5 +1,5 @@
-import pkg_resources
-pkg_resources.require("pymysql==0.10.1")
+#import pkg_resources
+#pkg_resources.require("pymysql==0.10.1")
 import pymysql as mysql
 import sys, json, decimal
 import arraylizer
