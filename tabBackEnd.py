@@ -61,5 +61,5 @@ def getCityTab(id=None,query={}):
 				query=q
 			qr=makeWhereQuery(query,cols)
 			qr = "(%s)" % (qr)
-		data=dbh.getTable("Mcity,Mstate,Mcountry,Mcontinent",cols,qr,join={"stateId":"Mstate.id","countryId":"Mcountry.id","continentId":"Mcontinent.id"},ext="order by cityName")
+		data=dbh.getTable("Mcity,Mstate,Mcountry,Mcontinent",cols,qr,join={"stateId":"Mstate.id","Mstate.countryId":"Mcountry.id","continentId":"Mcontinent.id"},ext="order by cityName")
 		return({"data":data,"cols":["City", "Abbr", "State", "Country", "Continent"],"keys":cols})
