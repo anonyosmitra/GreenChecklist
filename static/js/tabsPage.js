@@ -4,7 +4,7 @@ function tabsPage_init(){
     console.log("tabsPage.js loaded.")
 }
 function tabsPage_openTab(tabName){
-    tabs=["Country","State","City"];
+    tabs=["Country","Region","State","City"];
     if((tabs.includes(tabName))&&(tabName!=cache["tabName"]))
         POST({"tab":tabName},"openTab")
 }

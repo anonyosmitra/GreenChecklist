@@ -64,7 +64,35 @@ def getCountryTab(id=None, query={}, con=None, edit=False):
 		con.close()
 	return data
 
-
+def getRegionTab(id=None, query={}, con=None, edit=False):
+	kilcon = False
+	if con == None:
+		con = dbh.Connect()
+		kilcon = True
+	if id == None:
+		cols = ["regionName", "regionName", "countryName", "continentName"]
+		qr = ""
+		if query != {}:
+			if type(query) == str:
+				q = {}
+				for i in cols:
+					q[i] = query
+				query = q
+			qr = makeWhereQuery(query, cols)
+			qr = "(%s)" % (qr)
+		data = con.getTable("Mregion,Mcountry,Mcontinent", ["Mregion.id"] + cols, qr, join={"countryId": "Mcountry.id", "continentId": "Mcontinent.id"}, ext="order by regionName", columnNames=["id"] + cols)
+		data = {"data": data, "cols": ["Region", "Abbr", "Country", "Continent"], "keys": cols}
+	else:
+		if edit:
+			data = con.getTable("Mregion,Mcountry", ["regionName", "regionSName", "countryId", "Mcountry.continentId"], {"Mregion.id": id}, join={"Mcountry.id": "countryId"}, columnNames=["regionName", "regionSName", "countryId", "continentId"])[0]
+			data = [{"name": "Name", "value": data["regionName"], "var": "regionName"}, {"name": "Abbr", "value": data["regionSName"], "var": "regionSName"}, {"name": "Country", "var": "countryId", "value": data["countryId"], "opts": makeSelectOpts("country", "continent", data["continentId"], con=con)}, {"name": "Continent", "var": "continentId", "value": data["continentId"], "opts": makeSelectOpts("continent", con=con)}]
+			data = {"data": data, "col": ["regionName", "regionSName", "countryId", "continentId"]}
+		else:
+			data = con.getTable("Mregion,Mcountry,Mcontinent", ["regionName", "regionSName", "countryName", "continentName"], where={"Mregion.id": id}, join={ "Mregion.countryId": "Mcountry.id", "Mcountry.continentId": "Mcontinent.id"})[0]
+			data = [{"name": "Name", "value": data["regionName"]}, {"name": "Abbr", "value": data["regionSName"]}, {"name": "Country", "value": data["countryName"]}, {"name": "Continent", "value": data["continentName"]}]
+	if kilcon:
+		con.close()
+	return data
 def getStateTab(id=None, query={}, con=None, edit=False):
 	kilcon = False
 	if con == None:
@@ -94,6 +122,7 @@ def getStateTab(id=None, query={}, con=None, edit=False):
 	if kilcon:
 		con.close()
 	return data
+
 
 def getOptions(tab,var,val,con=None):
 	kilcon = False

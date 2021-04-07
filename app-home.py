@@ -10,7 +10,7 @@ import os
 import requests
 import timezone as tz
 import ssl,socket
-getTab={"Country":tbe.getCountryTab,"State":tbe.getStateTab,"City":tbe.getCityTab}
+getTab={"Country":tbe.getCountryTab,"Region":tbe.getRegionTab,"State":tbe.getStateTab,"City":tbe.getCityTab}
 application = app = Flask(__name__)
 CORS(app)
 
