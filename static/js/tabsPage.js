@@ -31,7 +31,7 @@ var getApp = new XMLHttpRequest();
 var methods={}
 function selTab(args)
 {
-    tabs=["Country","State","City"];
+    tabs=["Country","Region","State","City"];
  if(tabs.includes(args))
  {
 
