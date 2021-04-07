@@ -4,7 +4,7 @@ columns:list of columns
 keys: list to dict keys
 data: sql data
 -->
-<tr>{%for i in range(0,len(keys))%}<th onclick="document.getElementById('search_{{keys[i]}}').focus()">{{columns[i]}}</th>{%endfor%}<tr>
+<tr>{%for i in range(0,keys|length)%}<th onclick="document.getElementById('search_{{keys[i]}}').focus()">{{columns[i]}}</th>{%endfor%}<tr>
 <tr>{%for i in keys%}<td><i class="fa fa-search"></i><input id="search_{{i}}"></td>{%endfor%}</tr>
 {%for i in data%}
 <tr onclick="loadProfile({{i["id"]}})">
