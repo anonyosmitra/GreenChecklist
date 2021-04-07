@@ -102,3 +102,7 @@ function keyInJson(k,json)
 			}
 			return(false);
 		}
+function loadProfile(id)
+    {
+        POST({"tab":cache["tabName"],"id":id},"loadProfile");
+    }

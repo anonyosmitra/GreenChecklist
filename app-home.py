@@ -19,6 +19,11 @@ def home():
 	data=getTab["Country"]()
 	tab=render_template("tabTemp.html",columns=data["cols"],keys=data["keys"],data=data["data"])
 	return render_template("locationTabs.html",sel="Country",result=tab,keys=data["keys"],profile="")
+@app.route('/loadProfile', methods=['POST'])
+def loadProfile():
+	data = request.json
+	info=getTab[data["tab"]](id=data["id"])
+	print(info)
 @app.route('/search', methods=['POST'])
 def search():
 	data = request.json

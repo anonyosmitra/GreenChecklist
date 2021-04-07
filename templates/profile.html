@@ -23,6 +23,7 @@ data:[{"name":"Name",value:"Bangalore","var":"cityName"},{"name":"Abbr",value:"B
                         {%endfor%}
                         </select>
                     {%else%}
+                            <input id="profile_{{i["var"]}}" value="{{i["value"]}}" />
                     {%endif%}
                 {%else%}
                 {{i["value"]}}
