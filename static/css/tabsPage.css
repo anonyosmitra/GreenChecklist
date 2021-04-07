@@ -107,6 +107,7 @@ input.mainSearchBox {
     display: inline-block;
     background-color: #f2f2f2;
     border: none;
+    outline:none;
 }
 #profile select{
 	width: 103%;
@@ -115,4 +116,5 @@ input.mainSearchBox {
     display: inline-block;
     background-color: #f2f2f2;
     border: none;
+    outline:none;
 }
