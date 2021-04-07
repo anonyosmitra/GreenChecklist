@@ -70,7 +70,7 @@ def getRegionTab(id=None, query={}, con=None, edit=False):
 		con = dbh.Connect()
 		kilcon = True
 	if id == None:
-		cols = ["regionName", "regionName", "countryName", "continentName"]
+		cols = ["regionName", "regionSName", "countryName", "continentName"]
 		qr = ""
 		if query != {}:
 			if type(query) == str:
