@@ -32,7 +32,7 @@ def makeSelectOpts(get, where=None,id=None, con=None):
 	data=con.getTable("M"+get,["M"+get+".id",get+"Name"],where,columnNames=["id","name"],ext="order by "+get+"Name")
 	if kilcon:
 		con.close()
-
+	return data
 
 def getCountryTab(id=None, query={}, con=None, edit=False):
 	kilcon = False
