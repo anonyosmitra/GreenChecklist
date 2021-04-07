@@ -69,7 +69,7 @@ function makeOnEnters(args){
     for(i in args)
      onEnter({"div":"search_"+cache["keys"][i],"fun":"search","arg":cache["keys"][i]})
 }
-function fillProfile(arg){
+function fillProfile(args){
     document.getElementById("profileTab").innerHTML=args;
 }
 function onEnter(arg)
