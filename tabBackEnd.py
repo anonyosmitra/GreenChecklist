@@ -3,7 +3,9 @@ import os
 import requests
 import timezone as tz
 import datetime as dt
-
+zones=[]
+for i in tz.tzList:
+	zones+=[{"id":i,"name":i}]
 def requestToken(con=None,id=None,):
 	kilcon = False
 	resp=0
@@ -175,9 +177,6 @@ def getCityTab(id=None, query={}, con=None, edit=False):
 		data = {"data": data, "cols": ["City", "Abbr", "State", "Country", "Continent"], "keys": cols}
 	else:
 		if edit:
-			zones=[]
-			for i in tz.tzList:
-				zones+=[{"id":i,"name":i}]
 			data = con.getTable("Mcity,Mstate,Mcountry", ["cityName", "citySName", "Mcity.stateId", "Mcity.regionId", "Mcity.countryId", "Mcountry.continentId","timezone"], {"Mstate.id": id}, join={"Mcity.stateId":"Mstate.id","Mcountry.id": "Mstate.countryId"}, columnNames=["cityName", "citySName", "stateId", "regionId", "countryId", "continentId","timezone"])[0]
 			data = [{"name": "Name", "value": data["cityName"], "var": "cityName"}, {"name": "Abbr", "value": data["citySName"], "var": "citySName"}, {"name": "State", "value": data["stateId"], "var": "stateId", "opts": makeSelectOpts("state", "region", data["regionId"], con=con)}, {"name": "Region", "value": data["regionId"], "var": "regionId", "opts": makeSelectOpts("region", "country", data["countryId"], con=con)}, {"name": "Country", "var": "countryId", "value": data["countryId"], "opts": makeSelectOpts("country", "continent", data["continentId"], con=con)}, {"name": "Continent", "var": "continentId", "value": data["continentId"], "opts": makeSelectOpts("continent", con=con)},{"name": "Timezone", "var": "timezone", "value": data["timezone"], "opts": zones}]
 			data = {"data": data, "col": ["cityName", "citySName", "stateId", "regionId", "countryId", "continentId","timezone"],"token":requestToken(con)}
@@ -191,4 +190,19 @@ def newCountry(form=None):
 	if form==None:
 		data = [{"name": "Name", "value": "", "var": "countryName"}, {"name": "Country Code", "value": "", "var": "countryCode"}, {"name": "Continent", "value": 0, "var": "continentId", "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
 		data = {"data": data, "col": ["countryName", "countryCode", "continentId"],"token":requestToken()}
+		return data
+def newRegion(form=None):
+	if form == None:
+		data = [{"name": "Name", "value": "", "var": "regionName"}, {"name": "Abbr", "value": "", "var": "regionSName"}, {"name": "Country", "var": "countryId", "value": 0, "opts": [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
+		data = {"data": data, "col": ["regionName", "regionSName", "countryId", "continentId"], "token": requestToken()}
+		return data
+def newState(form=None):
+	if form == None:
+		data = [{"name": "Name", "value": "", "var": "stateName"}, {"name": "Abbr", "value": "", "var": "stateSName"}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts": [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
+		data = {"data": data, "col": ["stateName", "stateSName", "regionId", "countryId", "continentId"], "token": requestToken()}
+		return data
+def newCity(form=None):
+	if form == None:
+		data = [{"name": "Name", "value": "", "var": "cityName"}, {"name": "Abbr", "value": "", "var": "citySName"}, {"name": "State", "value": 0, "var": "stateId", "opts": [{"name":"Select Continent First"}]}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts": 0}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}, {"name": "Timezone", "var": "timezone", "value": 0, "opts": zones+[{"name":"Select Timezone"}]}]
+		data = {"data": data, "col": ["cityName", "citySName", "stateId", "regionId", "countryId", "continentId", "timezone"], "token": requestToken()}
 		return data
