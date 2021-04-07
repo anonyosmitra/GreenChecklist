@@ -91,6 +91,10 @@ function onEnter(arg)
     		    methods[arg["keyD"]](arg["arg"]);
     		else
     			methods[arg["keyD"]]();}})};
+function cacheToken(args)
+{
+    cache["token"]=args;
+}
 function cacheProfileFields(args)
 {
     cache["profileFields"]=args;
@@ -101,7 +105,7 @@ function setSelOpts(args)
         document.getElementById("profile_"+args[i]["var"]).innerHTML=args[i]["html"];
 }
 methods=Object.assign(methods,{"selTab":selTab,"fillTable":fillTable,"search":search,"moveClearButton":moveClearButton,"onEnter":onEnter,"makeOnEnters":makeOnEnters,"fillProfile":fillProfile})
-methods=Object.assign(methods,{"cacheProfileFields":cacheProfileFields,"setSelOpts":setSelOpts})
+methods=Object.assign(methods,{"cacheProfileFields":cacheProfileFields,"setSelOpts":setSelOpts,"cacheToken":cacheToken})
 function POST(data,route="")
 	{
 		getApp.open('POST',"http://3.7.72.90/"+route);
@@ -129,4 +133,8 @@ function updateSelOpt(variable)
     {
         if(variable!="timezone")
             POST({"tab":cache["tabName"],"var":variable,"val":document.getElementById("profile_"+variable).value},"UpdateSelOpts");
+    }
+function addNew()
+    {
+        POST({"tab":cache["tabName"]},"addNew");
     }

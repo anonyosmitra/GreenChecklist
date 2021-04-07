@@ -11,6 +11,7 @@ import requests
 import timezone as tz
 import ssl,socket
 getTab={"Country":tbe.getCountryTab,"Region":tbe.getRegionTab,"State":tbe.getStateTab,"City":tbe.getCityTab}
+newEntry={"Country":tbe.newCountry}
 application = app = Flask(__name__)
 CORS(app)
 
@@ -49,6 +50,14 @@ def openTab():
 	tabName = request.json["tab"]
 	tab= getTab[tabName]()
 	return (jsonify({"reply": {"auth": 1, "exe":[{"method":"fillTable","arg":render_template("tabTemp.html",columns=tab["cols"],keys=tab["keys"],data=tab["data"])},{"method":"makeOnEnters","arg":tab["keys"]},{"method":"selTab","arg":tabName}]}}))
+@app.route('/addNew', methods=['POST'])
+def addNew():
+	data = request.json
+	if "form" in data:
+		newEntry[data["tab"]](data["form"])
+	else:
+		info=newEntry[data["tab"]]()
+		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html", data=info["data"], edit=True, tab=data["tab"], id=0)}, {"method": "cacheProfileFields", "arg": info["col"]},  {"method": "cacheToken", "arg": info["token"]}]}}))
 
 if __name__ == '__main__':
     app.secret_key = 'password'
