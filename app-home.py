@@ -38,7 +38,7 @@ def UpdateSelOpts():
 	print(data)
 	opts=tbe.getOptions(data["tab"],data["var"],data["val"])
 	for i in opts:
-		i["html"]=render_template("selOpts.html",opts=opts["opts"],sel=None)
+		i["html"]=render_template("selOpts.html",opts=i["opts"],sel=None)
 	return (jsonify({"reply": {"auth": 1, "exe": [{"method": "setSelOpts", "arg":opts}]}}))
 @app.route('/search', methods=['POST'])
 def search():
