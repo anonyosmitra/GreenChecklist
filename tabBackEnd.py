@@ -90,6 +90,7 @@ def getStateTab(id=None, query={}, con=None, edit=False):
 def getOptions(tab,var,val,con=None):
 	kilcon = False
 	sel = ['Continent', 'Country', 'Region', 'State', 'City']
+	var=var[:-2]
 	sel = sel[sel.index(var.capitalize()) + 1:sel.index(tab.capitalize())]
 	info=[]
 	if len(sel)>0:
