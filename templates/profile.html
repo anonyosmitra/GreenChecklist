@@ -19,7 +19,7 @@ data:[{"name":"Name",value:"Bangalore","var":"cityName"},{"name":"Abbr",value:"B
                     {%if "opts" in i%}
                         <select id="profile_{{i["var"]}}">
                         {%for j in i["opts"]%}
-                            <option {%if "id" not in j%}selected disabled{%else%}value="{{j["id"]}}" {%if j["id"]==i["value"]%}selected{%endif%}>{{j["name"]}}</option>
+                            <option {%if "id" not in j%}selected disabled{%else%}value="{{j["id"]}}" {%if j["id"]==i["value"]%}selected{%endif%}{%endif%}>{{j["name"]}}</option>
                         {%endfor%}
                         </select>
                     {%else%}
