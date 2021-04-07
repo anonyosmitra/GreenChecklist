@@ -27,7 +27,7 @@ def loadProfile():
 		edit=True
 	info=getTab[data["tab"]](id=data["id"],edit=edit)
 	print(info)
-	return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html",data=info,edit=False,tab=data["tab"],id=data["id")}]}}))
+	return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html",data=info,edit=False,tab=data["tab"],id=data["id"])}]}}))
 @app.route('/search', methods=['POST'])
 def search():
 	data = request.json
