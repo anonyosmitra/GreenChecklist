@@ -25,7 +25,7 @@ var getApp = new XMLHttpRequest();
 
 			else
 			{
-				console.log("reload page");
+				console.log("Auth Failed");
 			}
 		}}
 var methods={}
