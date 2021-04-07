@@ -26,7 +26,6 @@ def loadProfile():
 	if "edit" in data and data["edit"]:
 		edit=True
 	info=getTab[data["tab"]](id=data["id"],edit=edit)
-	print(info)
 	if edit:
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html",data=info["data"],edit=edit,tab=data["tab"],id=data["id"])},{"method": "cacheProfileFields", "arg":info["col"]}]}}))
 	else:
@@ -36,6 +35,7 @@ def loadProfile():
 @app.route('/UpdateSelOpts', methods=['POST'])
 def UpdateSelOpts():
 	data = request.json
+	print(data)
 	opts=tbe.getOptions(data["tab"],data["var"],data["val"])
 	for i in opts:
 		i["html"]=render_template("selOpts.html",opts=opts,sel=None)
