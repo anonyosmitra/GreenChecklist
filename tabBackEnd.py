@@ -86,7 +86,7 @@ def getStateTab(id=None, query={}, con=None, edit=False):
 	else:
 		if edit:
 			data = con.getTable("Mstate,Mcountry", ["stateName","stateSName","regionId","countryId", "Mcountry.continentId"], {"Mstate.id": id},join={"Mcountry.id":"countryId"},columnNames=["stateName","stateSName","regionId","countryId", "continentId"])[0]
-			data = [{"name": "Name", "value": data["stateName"]}, {"name": "Abbr", "value": data["stateSName"]}, {"name": "Region", "value": data["regionId"],"opts": makeSelectOpts("region" ,"country" ,data["countryId"] ,con=con)}, {"name": "Country", "value": data["countryId"],"opts": makeSelectOpts("country" ,"continent" ,data["continentId"] ,con=con)}, {"name": "Continent", "value": data["continentId"],"opts":makeSelectOpts("continent",con=con)}]
+			data = [{"name": "Name", "value": data["stateName"],"var":"stateName"}, {"name": "Abbr", "value": data["stateSName"],"var":"stateSName"}, {"name": "Region", "value": data["regionId"],"var":"regionId","opts": makeSelectOpts("region" ,"country" ,data["countryId"] ,con=con)}, {"name": "Country","var":"countryId", "value": data["countryId"],"opts": makeSelectOpts("country" ,"continent" ,data["continentId"] ,con=con)}, {"name": "Continent","var":"continentId", "value": data["continentId"],"opts":makeSelectOpts("continent",con=con)}]
 			data = {"data": data, "col": ["stateName","stateSName","regionId","countryId", "continentId"]}
 		else:
 			data = con.getTable("Mstate,Mregion,Mcountry,Mcontinent", ["stateName","stateSName","regionName","countryName","continentName"], where={"Mstate.id": id}, join={"Mstate.regionId":"Mregion.id","Mregion.countryId":"Mcountry.id","Mcountry.continentId": "Mcontinent.id"})[0]
