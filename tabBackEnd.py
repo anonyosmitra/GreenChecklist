@@ -20,7 +20,7 @@ def makeWhereQuery(query, cols=None, gate="or"):
 
 
 # (get="country",where="continent",id=1)=[{"id"=4,"name":"Algeria"},{"id":7,"name":"Angola"}...]
-def makeSelectOpts(get, where,id, con=None):
+def makeSelectOpts(get, where=None,id=None, con=None):
 	kilcon = False
 	if con == None:
 		con = dbh.Connect()
