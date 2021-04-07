@@ -89,7 +89,17 @@ function onEnter(arg)
     		    methods[arg["keyD"]](arg["arg"]);
     		else
     			methods[arg["keyD"]]();}})};
+function cacheProfileFields(args)
+{
+    cache["profileFields"]=args;
+}
+function setSelOpts(args)
+{
+    for(i in args)
+        document.getElementById("profile_"+args[i]["var"]).innerHTML=args[i]["html"];
+}
 methods=Object.assign(methods,{"selTab":selTab,"fillTable":fillTable,"search":search,"moveClearButton":moveClearButton,"onEnter":onEnter,"makeOnEnters":makeOnEnters,"fillProfile":fillProfile})
+methods=Object.assign(methods,{"cacheProfileFields":cacheProfileFields,"setSelOpts":setSelOpts})
 function POST(data,route="")
 	{
 		getApp.open('POST',"http://3.7.72.90/"+route);
@@ -112,4 +122,9 @@ function loadProfile(id)
 function loadProfileEditor(id)
     {
         POST({"tab":cache["tabName"],"id":id,"edit":1},"loadProfile");
+    }
+function updateSelOpt(variable)
+    {
+        if(variable!="timezone")
+            POST({"tab":cache["tabName"],"var":variable,"val":document.getElementById("profile_"+variable).value},"UpdateSelOpts");
     }

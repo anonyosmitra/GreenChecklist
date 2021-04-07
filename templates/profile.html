@@ -17,7 +17,7 @@ data:[{"name":"Name",value:"Bangalore","var":"cityName"},{"name":"Abbr",value:"B
             <td>
                 {%if edit%}
                     {%if "opts" in i%}
-                        <select id="profile_{{i["var"]}}">
+                        <select id="profile_{{i["var"]}}" onchange="updateSelOpt('{{i["var"]}}')">
                         {%for j in i["opts"]%}
                             <option {%if "id" not in j%}selected disabled{%else%}value="{{j["id"]}}" {%if j["id"]==i["value"]%}selected{%endif%}{%endif%}>{{j["name"]}}</option>
                         {%endfor%}

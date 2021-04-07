@@ -27,7 +27,19 @@ def loadProfile():
 		edit=True
 	info=getTab[data["tab"]](id=data["id"],edit=edit)
 	print(info)
-	return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html",data=info,edit=edit,tab=data["tab"],id=data["id"])}]}}))
+	if edit:
+		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html",data=info["data"],edit=edit,tab=data["tab"],id=data["id"])},{"method": "cacheProfileFields", "arg":info["col"]}]}}))
+	else:
+		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html",data=info,edit=edit,tab=data["tab"],id=data["id"])}]}}))
+
+
+@app.route('/UpdateSelOpts', methods=['POST'])
+def UpdateSelOpts():
+	data = request.json
+	opts=tbe.getOptions(data["tab"],data["var"],data["val"])
+	for i in opts:
+		i["html"]=render_template("selOpts.html",opts=opts,sel=None)
+	return (jsonify({"reply": {"auth": 1, "exe": [{"method": "setSelOpts", "arg":opts}]}}))
 @app.route('/search', methods=['POST'])
 def search():
 	data = request.json

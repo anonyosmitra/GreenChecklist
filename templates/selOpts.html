@@ -1,0 +1,8 @@
+<!--
+Variables:
+sel: selected id
+opts :[{"id":1,"name":"Karnataka"},{"id":2,"name":"Tamil Nadu"}...]}]
+-->
+{%for j in opts%}
+<option {%if "id" not in j%}selected disabled{%else%}value="{{j["id"]}}" {%if j["id"]==sel%}selected{%endif%}{%endif%}>{{j["name"]}}</option>
+{%endfor%}

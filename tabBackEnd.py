@@ -56,6 +56,7 @@ def getCountryTab(id=None, query={}, con=None, edit=False):
 		if edit:
 			data = con.getTable("Mcountry", ["countryName", "countryCode", "continentId"], {"Mcountry.id": id})[0]
 			data = [{"name": "Name", "value": data["countryName"],"var":"countryName"}, {"name": "Country Code", "value": data["countryCode"],"var":"countryCode"}, {"name": "Continent", "value": data["continentId"],"var":"continentId","opts":makeSelectOpts("continent",con=con)}]
+			data={"data": data, "col": ["countryName", "countryCode", "continentId"]}
 		else:
 			data = con.getTable("Mcountry,Mcontinent", ["countryName", "countryCode", "continentName"], {"Mcountry.id": id},join={"continentId": "Mcontinent.id"})[0]
 			data = [{"name": "Name", "value": data["countryName"]}, {"name": "Country Code", "value": data["countryCode"]}, {"name": "Continent", "value": data["continentName"]}]
@@ -86,7 +87,22 @@ def getStateTab(id=None, query={}, con=None, edit=False):
 		con.close()
 	return data
 
-
+def getOptions(tab,var,val,con=None):
+	kilcon = False
+	sel = ['Continent', 'Country', 'Region', 'State', 'City']
+	sel = sel[sel.index(var.capitalize()) + 1:sel.index(tab.capitalize())]
+	info=[]
+	if len(sel)>0:
+		if con == None:
+			con = dbh.Connect()
+			kilcon = True
+		info += [{"var": sel[0].lower(), "opts": makeSelectOpts(sel[0].lower(), var, val, con)} + [{"name":"Select %s"%(sel[0])}]]
+		if kilcon:
+			con.close()
+		if len(sel)>1:
+			for i in range(1,len(sel)):
+				info += [{"var": sel[i].lower(), "opts":[{"name":"Select %s First"%(sel[0])}]}]
+	return info
 def getCityTab(id=None, query={}, con=None, edit=False):
 	kilcon = False
 	if con == None:
