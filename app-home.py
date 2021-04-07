@@ -22,7 +22,10 @@ def home():
 @app.route('/loadProfile', methods=['POST'])
 def loadProfile():
 	data = request.json
-	info=getTab[data["tab"]](id=data["id"])
+	edit=False
+	if "edit" in data and data["edit"]:
+		edit=True
+	info=getTab[data["tab"]](id=data["id"],edit=edit)
 	print(info)
 	return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html",data=info,edit=False,tab=data["tab"],id=id)}]}}))
 @app.route('/search', methods=['POST'])

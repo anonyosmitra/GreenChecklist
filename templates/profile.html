@@ -6,7 +6,7 @@ id: row id
 data:[{"name":"Name",value:"Bangalore","var":"cityName"},{"name":"Abbr",value:"BLR","var":citySname},{"name":"State",value:"1","var":"stateId","opts":[{"id":1,"name":"Karnataka"},{"id":2,"name":"Tamil Nadu"}...]}]
 -->
 <div id="profile" class="profile">
-<i class="fa fa-{%if edit%}trash tabButton highlight" onclick="alert('todo')"{%else%}edit tabButton highlight" onclick="alert('todo')"{%endif%} style="float:right; margin-right:30px;"></i>
+<i class="fa fa-{%if edit%}trash tabButton highlight" onclick="editProfile({{id}})"{%else%}edit tabButton highlight" onclick="alert('todo')"{%endif%} style="float:right; margin-right:30px;"></i>
     <h5>{{tab}} Details</h5>
     <table>
         {%for i in data%}

@@ -109,3 +109,7 @@ function loadProfile(id)
     {
         POST({"tab":cache["tabName"],"id":id},"loadProfile");
     }
+function loadProfileEditor(id)
+    {
+        POST({"tab":cache["tabName"],"id":id,"edit":1},"loadProfile");
+    }
