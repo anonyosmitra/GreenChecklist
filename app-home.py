@@ -28,7 +28,6 @@ def search():
 def openTab():
 	tabName = request.json["tab"]
 	tab= getTab[tabName]()
-	print(tab)
 	return (jsonify({"reply": {"auth": 1, "exe":[{"method":"fillTable","arg":render_template("tabTemp.html",columns=tab["cols"],keys=tab["keys"],data=tab["data"])},{"method":"makeOnEnters","arg":tab["keys"]},{"method":"selTab","arg":tabName}]}}))
 
 if __name__ == '__main__':

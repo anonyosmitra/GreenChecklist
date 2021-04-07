@@ -70,7 +70,7 @@ input.mainSearchBox {
 
 #tabEntries tr:nth-child(even){background-color: #f2f2f2;}
 
-#tabEntries tr:hover {background-color: #ddd;}
+#tabEntries tr:hover {background-color: #ddd;cursor:pointer;}
 #tabEntries input{width:90%;border:none;outline: none;}
 #tabEntries input:hover {background-color: #ddd;}
 
@@ -81,4 +81,34 @@ input.mainSearchBox {
   background-color: #003d99;
   color: white;
   text-align: center;
+}
+.profile{
+	border:solid;
+    border-width:bold;
+    border-color:#9BDBDD;
+    padding: 12px;
+    padding-bottom:50px;
+    background-color: #ffffff;
+}
+#profile h5{
+	color: #003d99;
+    font-size: 20px;
+    margin-top: 5px;
+    margin-bottom: 3px;
+}
+#profile input{
+	width: 150%;
+    height: 20px;
+    font-size: 15px;
+    display: inline-block;
+    background-color: #f2f2f2;
+    border: none;
+}
+#profile select{
+	width: 153%;
+    height: 23px;
+    font-size: 15px;
+    display: inline-block;
+    background-color: #f2f2f2;
+    border: none;
 }

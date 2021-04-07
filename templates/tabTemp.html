@@ -7,7 +7,7 @@ data: sql data
 <tr>{%for i in columns%}<th>{{i}}</th>{%endfor%}<tr>
 <tr>{%for i in keys%}<td><i class="fa fa-search"></i><input id="search_{{i}}"></td>{%endfor%}</tr>
 {%for i in data%}
-<tr>
+<tr onclick="alert('{{i["id"]}}')">
     {%for j in keys%}<td>{{i[j]}}</td>{%endfor%}
 </tr>
 {%endfor%}
