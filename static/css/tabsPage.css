@@ -91,6 +91,10 @@ input.mainSearchBox {
     background-color: #ffffff;
     width: 100%;
 }
+#profile td{
+    padding-right:20px;
+}
+}
 #profile h5{
 	color: #003d99;
     font-size: 20px;
