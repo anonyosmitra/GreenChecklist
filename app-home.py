@@ -35,7 +35,6 @@ def loadProfile():
 @app.route('/UpdateSelOpts', methods=['POST'])
 def UpdateSelOpts():
 	data = request.json
-	print(data)
 	opts=tbe.getOptions(data["tab"],data["var"],data["val"])
 	for i in opts:
 		i["html"]=render_template("selOpts.html",opts=i["opts"],sel=None)

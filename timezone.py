@@ -2,10 +2,11 @@ from datetime import datetime
 import datetime as dt
 import pytz
 defaultFmt = "%Y-%m-%d %H:%M:%S %Z%z"
+tzList = pytz.all_timezones
 timezones ={'London':'UTC','Los Angeles':'US/Pacific','Berlin':'Europe/Berlin','New Delhi':'Asia/Kolkata'}
 def convertTo(time,zone=None,fmt=defaultFmt,place=None,SysTZ="UTC"):
 		if zone==None:
-				zone=pytztimezones[place]
+				zone=timezones[place]
 		if type(zone)==str:
 			zone=pytz.timezone(zone)
 			time = time.replace(tzinfo=pytz.timezone(SysTZ)).astimezone(zone)

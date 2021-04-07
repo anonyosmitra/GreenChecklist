@@ -130,6 +130,16 @@ def getCityTab(id=None, query={}, con=None, edit=False):
 			qr = "(%s)" % (qr)
 		data = con.getTable("Mcity,Mstate,Mcountry,Mcontinent", ["Mcity.id"] + cols, qr, join={"stateId": "Mstate.id", "Mstate.countryId": "Mcountry.id", "continentId": "Mcontinent.id"}, ext="order by cityName", columnNames=["id"] + cols)
 		data = {"data": data, "cols": ["City", "Abbr", "State", "Country", "Continent"], "keys": cols}
+	else:
+		if edit:
+			zones=[]
+			for i in tz.tzList:
+				zones+=[{"id":i,"name":i}]
+			data = con.getTable("Mcity,Mstate,Mcountry", ["cityName", "citySName", "Mcity.stateId", "Mcity.regionId", "Mcity.countryId", "Mcountry.continentId","timezone"], {"Mstate.id": id}, join={"Mcity.stateId":"Mstate.id","Mcountry.id": "Mstate.countryId"}, columnNames=["cityName", "citySName", "stateId", "regionId", "countryId", "continentId","timezone"])[0]
+			data = [{"name": "Name", "value": data["cityName"], "var": "cityName"}, {"name": "Abbr", "value": data["citySName"], "var": "citySName"}, {"name": "State", "value": data["stateId"], "var": "stateId", "opts": makeSelectOpts("state", "region", data["regionId"], con=con)}, {"name": "Region", "value": data["regionId"], "var": "regionId", "opts": makeSelectOpts("region", "country", data["countryId"], con=con)}, {"name": "Country", "var": "countryId", "value": data["countryId"], "opts": makeSelectOpts("country", "continent", data["continentId"], con=con)}, {"name": "Continent", "var": "continentId", "value": data["continentId"], "opts": makeSelectOpts("continent", con=con)},{"name": "Timezone", "var": "timezone", "value": data["timezone"], "opts": zones}]
+		else:
+			data = con.getTable("Mcity,Mstate,Mregion,Mcountry,Mcontinent", ["cityName","citySName","stateName", "regionName", "countryName", "continentName"], where={"Mcity.id": id}, join={"Mcity.stateId": "Mstate.id","Mstate.regionId": "Mregion.id", "Mregion.countryId": "Mcountry.id", "Mcountry.continentId": "Mcontinent.id"})[0]
+			data = [{"name": "Name", "value": data["cityName"]}, {"name": "Abbr", "value": data["citySName"]},{"name": "State", "value": data["stateName"]}, {"name": "Region", "value": data["regionName"]}, {"name": "Country", "value": data["countryName"]}, {"name": "Continent", "value": data["continentName"]}]
 	if kilcon:
 		con.close()
 	return data
