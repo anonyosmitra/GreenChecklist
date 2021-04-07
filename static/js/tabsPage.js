@@ -44,6 +44,7 @@ function selTab(args)
 function fillTable(args)
 {
     document.getElementById("tabEntries").innerHTML=args;
+    document.getElementById('tabEntries').focus()
 }
 function search(args=null)
 {
@@ -71,6 +72,7 @@ function makeOnEnters(args){
 }
 function fillProfile(args){
     document.getElementById("profileTab").innerHTML=args;
+    document.getElementById('profileTab').focus()
 }
 function onEnter(arg)
 {
