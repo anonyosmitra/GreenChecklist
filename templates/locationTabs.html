@@ -28,6 +28,7 @@ keys=table keys
     </script>
 </head>
 <body onload="tabsPage_init()" >
+<div style="display:inline-block;">
     {%set tabs=["Country","State","City"]%}
     {%for i in tabs%}
     <div id="tab_{{i}}" class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab('{{i}}')">{{i}}</div>
@@ -40,6 +41,7 @@ keys=table keys
     <table id="tabEntries">
         {{html|safe}}
     </table>
-</div>
+</div></div>
+<div style="display:inline-block;">test Here</div>
 </body>
 </html>
