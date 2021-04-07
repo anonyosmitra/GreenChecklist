@@ -89,7 +89,7 @@ function onEnter(arg)
     		    methods[arg["keyD"]](arg["arg"]);
     		else
     			methods[arg["keyD"]]();}})};
-methods=Object.assign(methods,{"selTab":selTab,"fillTable":fillTable,"search":search,"moveClearButton":moveClearButton,"onEnter":onEnter,"makeOnEnters":makeOnEnters})
+methods=Object.assign(methods,{"selTab":selTab,"fillTable":fillTable,"search":search,"moveClearButton":moveClearButton,"onEnter":onEnter,"makeOnEnters":makeOnEnters,"fillProfile":fillProfile})
 function POST(data,route="")
 	{
 		getApp.open('POST',"http://3.7.72.90/"+route);
