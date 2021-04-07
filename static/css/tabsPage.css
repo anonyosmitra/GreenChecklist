@@ -118,3 +118,7 @@ input.mainSearchBox {
     border: none;
     outline:none;
 }
+.errorMsg{
+    color: red;
+    font-weight: bold;
+}

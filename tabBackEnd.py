@@ -186,23 +186,101 @@ def getCityTab(id=None, query={}, con=None, edit=False):
 	if kilcon:
 		con.close()
 	return data
+def checkValidity(id,data,tab,con=None):
+	kilcon = False
+	if con == None:
+		con = dbh.Connect()
+		kilcon = True
+	resp=True
+	qr={}
+	for i in data:
+		if data[i]=="" or data[i]==None:
+			resp = "Empty value detected!"
+		if i[-4:]=="Code":
+			if len(con.getTable("M"+i[:-4],["id"],con.appendQuery("%0=\"%1\" and id!=%2",[i,data[i],id])))>0:
+				resp="%s code already exists and must be unique!"%(i[:-4].capilatize())
+	if kilcon:
+		con.close()
+	return resp
 def newCountry(form=None):
 	if form==None:
 		data = [{"name": "Name", "value": "", "var": "countryName"}, {"name": "Country Code", "value": "", "var": "countryCode"}, {"name": "Continent", "value": 0, "var": "continentId", "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
 		data = {"data": data, "col": ["countryName", "countryCode", "continentId"],"token":requestToken()}
 		return data
+	else:
+		con=dbh.Connect()
+		id=checkValidity(0,form,"Country",con)
+		if id==True:
+			cols=con.desc(["name"])
+			ins={}
+			for i in cols:
+				if i["name"] in form:
+					ins[i["name"]]=form[i["name"]]
+			id=con.insertIntoTable("Mcountry",ins,returnId=True)
+		con.close()
+		return id
+
 def newRegion(form=None):
 	if form == None:
 		data = [{"name": "Name", "value": "", "var": "regionName"}, {"name": "Abbr", "value": "", "var": "regionSName"}, {"name": "Country", "var": "countryId", "value": 0, "opts": [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
 		data = {"data": data, "col": ["regionName", "regionSName", "countryId", "continentId"], "token": requestToken()}
 		return data
+	else:
+		con=dbh.Connect()
+		id=checkValidity(0,form,"Region",con)
+		if id==True:
+			cols=con.desc(["name"])
+			ins={}
+			for i in cols:
+				if i["name"] in form:
+					ins[i["name"]]=form[i["name"]]
+			id=con.insertIntoTable("Mregion",ins,returnId=True)
+		con.close()
+		return id
 def newState(form=None):
 	if form == None:
 		data = [{"name": "Name", "value": "", "var": "stateName"}, {"name": "Abbr", "value": "", "var": "stateSName"}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts": [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
 		data = {"data": data, "col": ["stateName", "stateSName", "regionId", "countryId", "continentId"], "token": requestToken()}
 		return data
+	else:
+		con=dbh.Connect()
+		id=checkValidity(0,form,"State",con)
+		if id==True:
+			cols=con.desc(["name"])
+			ins={}
+			for i in cols:
+				if i["name"] in form:
+					ins[i["name"]]=form[i["name"]]
+			id=con.insertIntoTable("Mstate",ins,returnId=True)
+		con.close()
+		return id
 def newCity(form=None):
 	if form == None:
 		data = [{"name": "Name", "value": "", "var": "cityName"}, {"name": "Abbr", "value": "", "var": "citySName"}, {"name": "State", "value": 0, "var": "stateId", "opts": [{"name":"Select Continent First"}]}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts":  [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}, {"name": "Timezone", "var": "timezone", "value": 0, "opts": zones+[{"name":"Select Timezone"}]}]
 		data = {"data": data, "col": ["cityName", "citySName", "stateId", "regionId", "countryId", "continentId", "timezone"], "token": requestToken()}
 		return data
+	else:
+		con=dbh.Connect()
+		id=checkValidity(0,form,"City",con)
+		if id==True:
+			cols=con.desc(["name"])
+			ins={}
+			for i in cols:
+				if i["name"] in form:
+					ins[i["name"]]=form[i["name"]]
+			id=con.insertIntoTable("Mcity",ins,returnId=True)
+		con.close()
+		return id
+def saveEdit(tab,form,id):
+	con = dbh.Connect()
+	resp= checkValidity(0, form, tab, con)
+	if resp == True:
+		cols = con.desc(["name"])
+		ins = {}
+		for i in cols:
+			if i["name"] in form:
+				ins[i["name"]] = form[i["name"]]
+		con.updateTable("M"+tab, ins,{"id":id})
+		resp=id
+	con.close()
+	return resp

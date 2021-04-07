@@ -54,7 +54,7 @@ def openTab():
 def addNew():
 	data = request.json
 	if "form" in data:
-		newEntry[data["tab"]](data["form"])
+		id=newEntry[data["tab"]](data["form"])
 	else:
 		info=newEntry[data["tab"]]()
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html", data=info["data"], edit=True, tab=data["tab"], id=0)}, {"method": "cacheProfileFields", "arg": info["col"]},  {"method": "cacheToken", "arg": info["token"]}]}}))

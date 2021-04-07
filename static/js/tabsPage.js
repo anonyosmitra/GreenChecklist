@@ -104,6 +104,10 @@ function setSelOpts(args)
     for(i in args)
         document.getElementById("profile_"+args[i]["var"]).innerHTML=args[i]["html"];
 }
+function profileError(arg)
+{
+    console.log("test")
+}
 methods=Object.assign(methods,{"selTab":selTab,"fillTable":fillTable,"search":search,"moveClearButton":moveClearButton,"onEnter":onEnter,"makeOnEnters":makeOnEnters,"fillProfile":fillProfile})
 methods=Object.assign(methods,{"cacheProfileFields":cacheProfileFields,"setSelOpts":setSelOpts,"cacheToken":cacheToken})
 function POST(data,route="")
@@ -137,4 +141,15 @@ function updateSelOpt(variable)
 function addNew()
     {
         POST({"tab":cache["tabName"]},"addNew");
+    }
+function submitForm(id)
+    {
+        data={"token":cache["token"],"id":id,"tab":cache["tabName"],"form":{}}
+        for(i in cache["profileFields"])
+            data["form"][cache["profileFields"][i]]=document.getElementById("profile_"+cache["profileFields"][i]).value
+        if(id==0)
+            POST(data,"addNew");
+        else
+            POST(data,"saveEdit");
+        delete(cache["token"])
     }

@@ -33,6 +33,7 @@ data:[{"name":"Name",value:"Bangalore","var":"cityName"},{"name":"Abbr",value:"B
         {%endfor%}
     </table>
     {%if edit%}
-    <div class="tabButton highlight" style="float:right; margin-right:40px;">Submit</div>
+    <div class="tabButton highlight" style="float:right; margin-right:40px;" onclick="submitForm({{id}})">Submit</div>
     {%endif%}
+    <p class="errorMsg">Test</p>
 </div>
