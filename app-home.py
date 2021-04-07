@@ -18,7 +18,7 @@ CORS(app)
 def home():
 	data=getTab["Country"]()
 	tab=render_template("tabTemp.html",columns=data["cols"],keys=data["keys"],data=data["data"])
-	return render_template("locationTabs.html",sel="Country",html=tab,keys=data["keys"])
+	return render_template("locationTabs.html",sel="Country",result=tab,keys=data["keys"],profile="")
 @app.route('/search', methods=['POST'])
 def search():
 	data = request.json
@@ -28,6 +28,7 @@ def search():
 def openTab():
 	tabName = request.json["tab"]
 	tab= getTab[tabName]()
+	print(tab)
 	return (jsonify({"reply": {"auth": 1, "exe":[{"method":"fillTable","arg":render_template("tabTemp.html",columns=tab["cols"],keys=tab["keys"],data=tab["data"])},{"method":"makeOnEnters","arg":tab["keys"]},{"method":"selTab","arg":tabName}]}}))
 
 if __name__ == '__main__':

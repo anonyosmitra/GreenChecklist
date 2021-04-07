@@ -1,6 +1,6 @@
 <!--
 Variables:
-html=table
+result=table
 sel=selected tab name(Country/State/City)
 keys=table keys
 -->
@@ -37,11 +37,11 @@ keys=table keys
  <div class="mainSearchBox">
         <input class="mainSearchBox" id="mainSearchBox">
         <button class="clearButt" id="clear" hidden>✕</button>
-    </div><i class="fa fa-search tabButton highlight" onclick="search()"></i>
+    </div><i class="fa fa-search tabButton highlight" onclick="search()"></i><i class="fa fa-plus tabButton highlight"></i>
     <table id="tabEntries">
-        {{html|safe}}
+        {{result|safe}}
     </table>
 </div></div>
-<div style="display:inline-block;">test Here</div>
+<div style="display:inline-block;" id="profileTab">{{profile|safe}}</div>
 </body>
 </html>
