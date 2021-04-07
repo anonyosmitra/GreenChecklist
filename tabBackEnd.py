@@ -205,5 +205,9 @@ def newCity(form=None):
 	#{"name": "Timezone", "var": "timezone", "value": 0, "opts": zones+[{"name":"Select Timezone"}]}
 	if form == None:
 		data = [{"name": "Name", "value": "", "var": "cityName"}, {"name": "Abbr", "value": "", "var": "citySName"}, {"name": "State", "value": 0, "var": "stateId", "opts": [{"name":"Select Continent First"}]}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts": 0}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
+		for i in data:
+			if "opts" in i:
+				for j in i["opts"]:
+					print(j)
 		data = {"data": data, "col": ["cityName", "citySName", "stateId", "regionId", "countryId", "continentId", "timezone"], "token": requestToken()}
 		return data
