@@ -89,6 +89,7 @@ input.mainSearchBox {
     padding: 12px;
     padding-bottom:50px;
     background-color: #ffffff;
+    width: 100%;
 }
 #profile h5{
 	color: #003d99;
