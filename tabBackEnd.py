@@ -202,7 +202,7 @@ def checkValidity(id,data,tab,con=None):
 	if kilcon:
 		con.close()
 	return resp
-def newCountry(form=None):
+def newCountry(form=None,token=None):
 	if form==None:
 		data = [{"name": "Name", "value": "", "var": "countryName"}, {"name": "Country Code", "value": "", "var": "countryCode"}, {"name": "Continent", "value": 0, "var": "continentId", "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
 		data = {"data": data, "col": ["countryName", "countryCode", "continentId"],"token":requestToken()}
@@ -210,7 +210,7 @@ def newCountry(form=None):
 	else:
 		con=dbh.Connect()
 		id=checkValidity(0,form,"Country",con)
-		if id==True:
+		if id==True and requestToken(con,token):
 			cols=con.desc(["name"])
 			ins={}
 			for i in cols:
@@ -220,7 +220,7 @@ def newCountry(form=None):
 		con.close()
 		return id
 
-def newRegion(form=None):
+def newRegion(form=None,token=None):
 	if form == None:
 		data = [{"name": "Name", "value": "", "var": "regionName"}, {"name": "Abbr", "value": "", "var": "regionSName"}, {"name": "Country", "var": "countryId", "value": 0, "opts": [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
 		data = {"data": data, "col": ["regionName", "regionSName", "countryId", "continentId"], "token": requestToken()}
@@ -228,7 +228,7 @@ def newRegion(form=None):
 	else:
 		con=dbh.Connect()
 		id=checkValidity(0,form,"Region",con)
-		if id==True:
+		if id==True and requestToken(con,token):
 			cols=con.desc(["name"])
 			ins={}
 			for i in cols:
@@ -237,7 +237,7 @@ def newRegion(form=None):
 			id=con.insertIntoTable("Mregion",ins,returnId=True)
 		con.close()
 		return id
-def newState(form=None):
+def newState(form=None,token=None):
 	if form == None:
 		data = [{"name": "Name", "value": "", "var": "stateName"}, {"name": "Abbr", "value": "", "var": "stateSName"}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts": [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
 		data = {"data": data, "col": ["stateName", "stateSName", "regionId", "countryId", "continentId"], "token": requestToken()}
@@ -245,7 +245,7 @@ def newState(form=None):
 	else:
 		con=dbh.Connect()
 		id=checkValidity(0,form,"State",con)
-		if id==True:
+		if id==True and requestToken(con,token):
 			cols=con.desc(["name"])
 			ins={}
 			for i in cols:
@@ -254,7 +254,7 @@ def newState(form=None):
 			id=con.insertIntoTable("Mstate",ins,returnId=True)
 		con.close()
 		return id
-def newCity(form=None):
+def newCity(form=None,token=None):
 	if form == None:
 		data = [{"name": "Name", "value": "", "var": "cityName"}, {"name": "Abbr", "value": "", "var": "citySName"}, {"name": "State", "value": 0, "var": "stateId", "opts": [{"name":"Select Continent First"}]}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts":  [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}, {"name": "Timezone", "var": "timezone", "value": 0, "opts": zones+[{"name":"Select Timezone"}]}]
 		data = {"data": data, "col": ["cityName", "citySName", "stateId", "regionId", "countryId", "continentId", "timezone"], "token": requestToken()}
@@ -262,7 +262,7 @@ def newCity(form=None):
 	else:
 		con=dbh.Connect()
 		id=checkValidity(0,form,"City",con)
-		if id==True:
+		if id==True and requestToken(con,token):
 			cols=con.desc(["name"])
 			ins={}
 			for i in cols:
@@ -271,10 +271,10 @@ def newCity(form=None):
 			id=con.insertIntoTable("Mcity",ins,returnId=True)
 		con.close()
 		return id
-def saveEdit(tab,form,id):
+def saveEdit(tab,form,id,token):
 	con = dbh.Connect()
 	resp= checkValidity(0, form, tab, con)
-	if resp == True:
+	if resp == True and requestToken(con,token):
 		cols = con.desc(dbh.appendQuery("M%0",[tab.lower()]))
 		ins = {}
 		for i in cols:

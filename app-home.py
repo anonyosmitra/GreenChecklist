@@ -55,7 +55,7 @@ def addNew():
 	data = request.json
 	print(data)
 	if "form" in data:
-		id=newEntry[data["tab"]](data["form"])
+		id=newEntry[data["tab"]](data["form"],data["token"])
 		if type(id)!=int:
 			return(jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg":id}]}}))
 		else:
@@ -68,7 +68,7 @@ def addNew():
 @app.route('/saveEdit', methods=['POST'])
 def saveEdit():
 	data = request.json
-	id = tbe.saveEdit(data["tab"],data["form"],data["id"])
+	id = tbe.saveEdit(data["tab"],data["form"],data["id"],data["token"])
 	if type(id) != int:
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": i}]}}))
 	else:
