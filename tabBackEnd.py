@@ -274,6 +274,7 @@ def newCity(form=None,token=None):
 def saveEdit(tab,form,id,token):
 	con = dbh.Connect()
 	resp= checkValidity(0, form, tab, con)
+	print(resp)
 	if resp == True and requestToken(con,token):
 		cols = con.desc(dbh.appendQuery("M%0",[tab.lower()]),["name"])
 		ins = {}
