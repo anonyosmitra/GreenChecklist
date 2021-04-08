@@ -211,7 +211,7 @@ def newCountry(form=None,token=None):
 		con=dbh.Connect()
 		id=checkValidity(0,form,"Country",con)
 		if id==True and requestToken(con,token):
-			cols=con.desc(["name"])
+			cols=con.desc("Mcountry",["name"])
 			ins={}
 			for i in cols:
 				if i["name"] in form:
@@ -229,7 +229,7 @@ def newRegion(form=None,token=None):
 		con=dbh.Connect()
 		id=checkValidity(0,form,"Region",con)
 		if id==True and requestToken(con,token):
-			cols=con.desc(["name"])
+			cols=con.desc("Mregion",["name"])
 			ins={}
 			for i in cols:
 				if i["name"] in form:
@@ -246,7 +246,7 @@ def newState(form=None,token=None):
 		con=dbh.Connect()
 		id=checkValidity(0,form,"State",con)
 		if id==True and requestToken(con,token):
-			cols=con.desc(["name"])
+			cols=con.desc("Mstate",["name"])
 			ins={}
 			for i in cols:
 				if i["name"] in form:
@@ -263,7 +263,7 @@ def newCity(form=None,token=None):
 		con=dbh.Connect()
 		id=checkValidity(0,form,"City",con)
 		if id==True and requestToken(con,token):
-			cols=con.desc(["name"])
+			cols=con.desc("Mcity",["name"])
 			ins={}
 			for i in cols:
 				if i["name"] in form:
@@ -275,7 +275,7 @@ def saveEdit(tab,form,id,token):
 	con = dbh.Connect()
 	resp= checkValidity(0, form, tab, con)
 	if resp == True and requestToken(con,token):
-		cols = con.desc(dbh.appendQuery("M%0",[tab.lower()]))
+		cols = con.desc(dbh.appendQuery("M%0",[tab.lower()]),["name"])
 		ins = {}
 		for i in cols:
 			if i["name"] in form:
