@@ -70,7 +70,7 @@ def saveEdit():
 	data = request.json
 	id = tbe.saveEdit(data["tab"],data["form"],data["id"],data["token"])
 	if type(id) != int:
-		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": i}]}}))
+		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": id}]}}))
 	else:
 		info = getTab[data["tab"]](id=id, edit=False)
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html", data=info, edit=False, tab=data["tab"], id=id)}]}}))
