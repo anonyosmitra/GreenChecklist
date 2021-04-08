@@ -280,7 +280,9 @@ def saveEdit(tab,form,id,token):
 	resp= checkValidity(0, form, tab, con)
 	print(resp)
 	if resp == True:
+		print("Yes")
 		if requestToken(con,token):
+			print("Valid")
 			cols = con.desc(dbh.appendQuery("M%0",[tab.lower()]),["name"])
 			ins = {}
 			for i in cols:
@@ -288,6 +290,8 @@ def saveEdit(tab,form,id,token):
 					ins[i["name"]] = form[i["name"]]
 			con.updateTable(dbh.appendQuery("M%0",[tab.lower()]), ins,{"id":id})
 			resp=id
+		else:
+			print("Invalid")
 	else:
 		print("No")
 	con.close()
