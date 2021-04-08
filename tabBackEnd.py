@@ -45,7 +45,7 @@ def makeSelectOpts(get, where=None,id=None, con=None):
 		where=""
 	else:
 		where={where + "Id": id}
-	data=con.getTable(dbh.appendQuery("M%0",[get.lower()]),[dbh.appendQuery("M%0.id",[get.lower()]),dbh.appendQuery("%0Name",[get.lower()])],where,columnNames=["id","name"],ext=dbh.appendQuery("order by %0 Name",[get]))
+	data=con.getTable(dbh.appendQuery("M%0",[get.lower()]),[dbh.appendQuery("M%0.id",[get.lower()]),dbh.appendQuery("%0Name",[get.lower()])],where,columnNames=["id","name"],ext=dbh.appendQuery("order by %0Name",[get]))
 	if kilcon:
 		con.close()
 	return data
