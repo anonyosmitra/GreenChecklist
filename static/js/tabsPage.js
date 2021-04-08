@@ -102,10 +102,7 @@ function cacheProfileFields(args)
 function setSelOpts(args)
 {
     for(i in args)
-        {
-        console.log(args[i])
         document.getElementById("profile_"+args[i]["var"]).innerHTML=args[i]["html"];
-        }
 }
 function profileError(arg)
 {
