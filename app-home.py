@@ -57,7 +57,7 @@ def addNew():
 	if "form" in data:
 		id=newEntry[data["tab"]](data["form"])
 		if type(id)!=int:
-			return(jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg":i}]}}))
+			return(jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg":id}]}}))
 		else:
 			info = getTab[data["tab"]](id=id, edit=False)
 			return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html", data=info, edit=False, tab=data["tab"], id=id)}]}}))
