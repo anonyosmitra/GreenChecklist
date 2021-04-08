@@ -16,7 +16,7 @@ def requestToken(con=None,id=None,):
 	if id==None:
 		resp=con.insertIntoTable("formHandler",{"memo":"ok"},returnId=True)
 	else:
-		resp=con.deleteFromTable("formHAndler",{"id":id},returnCount=True)
+		resp=con.deleteFromTable("formHandler",{"id":id},returnCount=True)
 	if kilcon:
 		con.close()
 	return resp
@@ -204,7 +204,7 @@ def checkValidity(id,data,tab,con=None):
 	return resp
 def newCountry(form=None,token=None):
 	if form==None:
-		data = [{"name": "Name", "value": "", "var": "countryName"}, {"name": "Country Code", "value": "", "var": "countryCode"}, {"name": "Continent", "value": 0, "var": "continentId", "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
+		data = [{"name": "Name", "value": "", "var": "countryName"}, {"name": "Country Code", "value": "", "var": "countryCode"}, {"name": "Continent", "value": 0, "var": "continentId", "opts": [{"name":"Select Continent"}]+makeSelectOpts("continent")}]
 		data = {"data": data, "col": ["countryName", "countryCode", "continentId"],"token":requestToken()}
 		return data
 	else:
@@ -222,7 +222,7 @@ def newCountry(form=None,token=None):
 
 def newRegion(form=None,token=None):
 	if form == None:
-		data = [{"name": "Name", "value": "", "var": "regionName"}, {"name": "Abbr", "value": "", "var": "regionSName"}, {"name": "Country", "var": "countryId", "value": 0, "opts": [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
+		data = [{"name": "Name", "value": "", "var": "regionName"}, {"name": "Abbr", "value": "", "var": "regionSName"}, {"name": "Country", "var": "countryId", "value": 0, "opts": [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": [{"name":"Select Continent"}]+makeSelectOpts("continent")}]
 		data = {"data": data, "col": ["regionName", "regionSName", "countryId", "continentId"], "token": requestToken()}
 		return data
 	else:
@@ -239,7 +239,7 @@ def newRegion(form=None,token=None):
 		return id
 def newState(form=None,token=None):
 	if form == None:
-		data = [{"name": "Name", "value": "", "var": "stateName"}, {"name": "Abbr", "value": "", "var": "stateSName"}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts": [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}]
+		data = [{"name": "Name", "value": "", "var": "stateName"}, {"name": "Abbr", "value": "", "var": "stateSName"}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts": [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": [{"name":"Select Continent"}]+makeSelectOpts("continent")}]
 		data = {"data": data, "col": ["stateName", "stateSName", "regionId", "countryId", "continentId"], "token": requestToken()}
 		return data
 	else:
@@ -256,7 +256,7 @@ def newState(form=None,token=None):
 		return id
 def newCity(form=None,token=None):
 	if form == None:
-		data = [{"name": "Name", "value": "", "var": "cityName"}, {"name": "Abbr", "value": "", "var": "citySName"}, {"name": "State", "value": 0, "var": "stateId", "opts": [{"name":"Select Continent First"}]}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts":  [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": makeSelectOpts("continent")+[{"name":"Select Continent"}]}, {"name": "Timezone", "var": "timezone", "value": 0, "opts": zones+[{"name":"Select Timezone"}]}]
+		data = [{"name": "Name", "value": "", "var": "cityName"}, {"name": "Abbr", "value": "", "var": "citySName"}, {"name": "State", "value": 0, "var": "stateId", "opts": [{"name":"Select Continent First"}]}, {"name": "Region", "value": 0, "var": "regionId", "opts": [{"name":"Select Continent First"}]}, {"name": "Country", "var": "countryId", "value": 0, "opts":  [{"name":"Select Continent First"}]}, {"name": "Continent", "var": "continentId", "value": 0, "opts": [{"name":"Select Continent"}]+makeSelectOpts("continent")}, {"name": "Timezone", "var": "timezone", "value": 0, "opts": [{"name":"Select Timezone"}]+zones}]
 		data = {"data": data, "col": ["cityName", "citySName", "stateId", "regionId", "countryId", "continentId", "timezone"], "token": requestToken()}
 		return data
 	else:
