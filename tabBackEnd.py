@@ -210,13 +210,14 @@ def newCountry(form=None,token=None):
 	else:
 		con=dbh.Connect()
 		id=checkValidity(0,form,"Country",con)
-		if id==True and requestToken(con,token):
-			cols=con.desc("Mcountry",["name"])
-			ins={}
-			for i in cols:
-				if i["name"] in form:
-					ins[i["name"]]=form[i["name"]]
-			id=con.insertIntoTable("Mcountry",ins,returnId=True)
+		if id==True:
+			if requestToken(con,token):
+				cols=con.desc("Mcountry",["name"])
+				ins={}
+				for i in cols:
+					if i["name"] in form:
+						ins[i["name"]]=form[i["name"]]
+				id=con.insertIntoTable("Mcountry",ins,returnId=True)
 		con.close()
 		return id
 
@@ -228,13 +229,14 @@ def newRegion(form=None,token=None):
 	else:
 		con=dbh.Connect()
 		id=checkValidity(0,form,"Region",con)
-		if id==True and requestToken(con,token):
-			cols=con.desc("Mregion",["name"])
-			ins={}
-			for i in cols:
-				if i["name"] in form:
-					ins[i["name"]]=form[i["name"]]
-			id=con.insertIntoTable("Mregion",ins,returnId=True)
+		if id==True:
+			if requestToken(con,token):
+				cols=con.desc("Mregion",["name"])
+				ins={}
+				for i in cols:
+					if i["name"] in form:
+						ins[i["name"]]=form[i["name"]]
+				id=con.insertIntoTable("Mregion",ins,returnId=True)
 		con.close()
 		return id
 def newState(form=None,token=None):
@@ -245,13 +247,14 @@ def newState(form=None,token=None):
 	else:
 		con=dbh.Connect()
 		id=checkValidity(0,form,"State",con)
-		if id==True and requestToken(con,token):
-			cols=con.desc("Mstate",["name"])
-			ins={}
-			for i in cols:
-				if i["name"] in form:
-					ins[i["name"]]=form[i["name"]]
-			id=con.insertIntoTable("Mstate",ins,returnId=True)
+		if id==True:
+			if requestToken(con,token):
+				cols=con.desc("Mstate",["name"])
+				ins={}
+				for i in cols:
+					if i["name"] in form:
+						ins[i["name"]]=form[i["name"]]
+				id=con.insertIntoTable("Mstate",ins,returnId=True)
 		con.close()
 		return id
 def newCity(form=None,token=None):
@@ -262,28 +265,30 @@ def newCity(form=None,token=None):
 	else:
 		con=dbh.Connect()
 		id=checkValidity(0,form,"City",con)
-		if id==True and requestToken(con,token):
-			cols=con.desc("Mcity",["name"])
-			ins={}
-			for i in cols:
-				if i["name"] in form:
-					ins[i["name"]]=form[i["name"]]
-			id=con.insertIntoTable("Mcity",ins,returnId=True)
+		if id==True:
+			if requestToken(con,token):
+				cols=con.desc("Mcity",["name"])
+				ins={}
+				for i in cols:
+					if i["name"] in form:
+						ins[i["name"]]=form[i["name"]]
+				id=con.insertIntoTable("Mcity",ins,returnId=True)
 		con.close()
 		return id
 def saveEdit(tab,form,id,token):
 	con = dbh.Connect()
 	resp= checkValidity(0, form, tab, con)
 	print(resp)
-	if resp == True and requestToken(con,token):
-		cols = con.desc(dbh.appendQuery("M%0",[tab.lower()]),["name"])
-		ins = {}
-		for i in cols:
-			if i["name"] in form:
-				ins[i["name"]] = form[i["name"]]
-		con.updateTable(dbh.appendQuery("M%0",[tab.lower()]), ins,{"id":id})
-		resp=id
-		print(resp)
+	if resp == True:
+		if requestToken(con,token):
+			cols = con.desc(dbh.appendQuery("M%0",[tab.lower()]),["name"])
+			ins = {}
+			for i in cols:
+				if i["name"] in form:
+					ins[i["name"]] = form[i["name"]]
+			con.updateTable(dbh.appendQuery("M%0",[tab.lower()]), ins,{"id":id})
+			resp=id
+			print(resp)
 	con.close()
 	return resp
 def deleteEntry(tab, id,token):
