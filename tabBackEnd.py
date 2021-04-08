@@ -155,7 +155,7 @@ def getOptions(tab,var,val,con=None):
 			con.close()
 		if len(sel)>1:
 			for i in range(1,len(sel)):
-				info += [{"var": dbh.appendQuery("%0Id",[sel[0].lower()]), "opts":[{"name":"Select %s First"%(sel[0])}]}]
+				info += [{"var": dbh.appendQuery("%0Id",[sel[i].lower()]), "opts":[{"name":"Select %s First"%(sel[0])}]}]
 	return info
 def getCityTab(id=None, query={}, con=None, edit=False):
 	kilcon = False
