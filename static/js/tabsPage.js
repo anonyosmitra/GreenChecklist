@@ -105,7 +105,7 @@ function setSelOpts(args)
         {
         console.log(args[i])
         document.getElementById("profile_"+args[i]["var"]).innerHTML=args[i]["html"];
-         console(document.getElementById("profile_"+args[i]["var"]))
+         console.log(document.getElementById("profile_"+args[i]["var"]))
         }
 }
 function profileError(arg)
