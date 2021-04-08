@@ -146,6 +146,7 @@ function addNew()
     }
 function submitForm(id)
     {
+        console.log(cache["token"])
         data={"token":cache["token"],"id":id,"tab":cache["tabName"],"form":{}}
         for(i in cache["profileFields"])
             data["form"][cache["profileFields"][i]]=document.getElementById("profile_"+cache["profileFields"][i]).value
@@ -153,10 +154,8 @@ function submitForm(id)
             POST(data,"addNew");
         else
             POST(data,"saveEdit");
-        delete(cache["token"])
     }
 function deleteEntry(id)
     {
         POST({"id":id,"tab":cache["tabName"]},"deleteEntry");
-        delete(cache["token"])
     }
