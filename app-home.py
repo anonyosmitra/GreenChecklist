@@ -55,9 +55,28 @@ def addNew():
 	data = request.json
 	if "form" in data:
 		id=newEntry[data["tab"]](data["form"])
+		if type(id)!=int:
+			return(jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg":i}]}}))
+		else:
+			info = getTab[data["tab"]](id=id, edit=False)
+			return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html", data=info, edit=False, tab=data["tab"], id=id)}]}}))
 	else:
 		info=newEntry[data["tab"]]()
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html", data=info["data"], edit=True, tab=data["tab"], id=0)}, {"method": "cacheProfileFields", "arg": info["col"]},  {"method": "cacheToken", "arg": info["token"]}]}}))
+
+@app.route('/saveEdit', methods=['POST'])
+def saveEdit():
+	data = request.json
+	id = tbe.saveEdit(data["tab"],data["form"],data["id"])
+	if type(id) != int:
+		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": i}]}}))
+	else:
+		info = getTab[data["tab"]](id=id, edit=False)
+		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html", data=info, edit=False, tab=data["tab"], id=id)}]}}))
+@app.route('/deleteEntry', methods=['POST'])
+def deleteEntry():
+	data = request.json
+
 
 if __name__ == '__main__':
     app.secret_key = 'password'

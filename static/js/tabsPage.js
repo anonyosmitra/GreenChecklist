@@ -106,10 +106,12 @@ function setSelOpts(args)
 }
 function profileError(arg)
 {
-    console.log("test")
+   ele=document.getElementById("profileErrorMsg");
+   ele.innerHTML=arg;
+   ele.hidden=false;
 }
 methods=Object.assign(methods,{"selTab":selTab,"fillTable":fillTable,"search":search,"moveClearButton":moveClearButton,"onEnter":onEnter,"makeOnEnters":makeOnEnters,"fillProfile":fillProfile})
-methods=Object.assign(methods,{"cacheProfileFields":cacheProfileFields,"setSelOpts":setSelOpts,"cacheToken":cacheToken})
+methods=Object.assign(methods,{"cacheProfileFields":cacheProfileFields,"setSelOpts":setSelOpts,"cacheToken":cacheToken,"profileError":profileError})
 function POST(data,route="")
 	{
 		getApp.open('POST',"http://3.7.72.90/"+route);
@@ -151,5 +153,10 @@ function submitForm(id)
             POST(data,"addNew");
         else
             POST(data,"saveEdit");
+        delete(cache["token"])
+    }
+function deleteEntry(id)
+    {
+        POST({"id":id,"tab":cache["tabName"]},"deleteEntry");
         delete(cache["token"])
     }

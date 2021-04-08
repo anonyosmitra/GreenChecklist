@@ -125,11 +125,11 @@ def getStateTab(id=None, query={}, con=None, edit=False):
 				query = q
 			qr = makeWhereQuery(query, cols)
 			qr = "(%s)" % (qr)
-		data = con.getTable("Mstate,Mcountry,Mcontinent", ["Mstate.id"] + cols, qr, join={"countryId": "Mcountry.id", "continentId": "Mcontinent.id"}, ext="order by stateName", columnNames=["id"] + cols)
+		data = con.getTable("Mstate,Mregion,Mcountry,Mcontinent", ["Mstate.id"] + cols, qr, join={"regionID":"Mregion.id","countryId": "Mcountry.id", "continentId": "Mcontinent.id"}, ext="order by stateName", columnNames=["id"] + cols)
 		data = {"data": data, "cols": ["State", "Abbr", "Country", "Continent"], "keys": cols}
 	else:
 		if edit:
-			data = con.getTable("Mstate,Mcountry", ["stateName","stateSName","regionId","countryId", "Mcountry.continentId"], {"Mstate.id": id},join={"Mcountry.id":"countryId"},columnNames=["stateName","stateSName","regionId","countryId", "continentId"])[0]
+			data = con.getTable("Mstate,Mregion,Mcountry", ["stateName","stateSName","regionId","countryId", "continentId"], {"Mstate.id": id},join={"Mregion.id":"regionId","Mcountry.id":"countryId"},columnNames=["stateName","stateSName","regionId","countryId", "continentId"])[0]
 			data = [{"name": "Name", "value": data["stateName"],"var":"stateName"}, {"name": "Abbr", "value": data["stateSName"],"var":"stateSName"}, {"name": "Region", "value": data["regionId"],"var":"regionId","opts": makeSelectOpts("region" ,"country" ,data["countryId"] ,con=con)}, {"name": "Country","var":"countryId", "value": data["countryId"],"opts": makeSelectOpts("country" ,"continent" ,data["continentId"] ,con=con)}, {"name": "Continent","var":"continentId", "value": data["continentId"],"opts":makeSelectOpts("continent",con=con)}]
 			data = {"data": data, "col": ["stateName","stateSName","regionId","countryId", "continentId"],"token":requestToken(con)}
 		else:
@@ -173,15 +173,15 @@ def getCityTab(id=None, query={}, con=None, edit=False):
 				query = q
 			qr = makeWhereQuery(query, cols)
 			qr = "(%s)" % (qr)
-		data = con.getTable("Mcity,Mstate,Mcountry,Mcontinent", ["Mcity.id"] + cols, qr, join={"stateId": "Mstate.id", "Mstate.countryId": "Mcountry.id", "continentId": "Mcontinent.id"}, ext="order by cityName", columnNames=["id"] + cols)
+		data = con.getTable("Mcity,Mstate,Mregion,Mcountry,Mcontinent", ["Mcity.id"] + cols, qr, join={"regionId":"Mregion.id","stateId": "Mstate.id", "countryId": "Mcountry.id", "continentId": "Mcontinent.id"}, ext="order by cityName", columnNames=["id"] + cols)
 		data = {"data": data, "cols": ["City", "Abbr", "State", "Country", "Continent"], "keys": cols}
 	else:
 		if edit:
-			data = con.getTable("Mcity,Mstate,Mcountry", ["cityName", "citySName", "Mcity.stateId", "Mcity.regionId", "Mcity.countryId", "Mcountry.continentId","timezone"], {"Mstate.id": id}, join={"Mcity.stateId":"Mstate.id","Mcountry.id": "Mstate.countryId"}, columnNames=["cityName", "citySName", "stateId", "regionId", "countryId", "continentId","timezone"])[0]
+			data = con.getTable("Mcity,Mstate,Mregion,Mcountry", ["cityName", "citySName", "stateId", "regionId", "countryId", "continentId","timezone"], {"Mstate.id": id}, join={"stateId":"Mstate.id","Mregion.id":"regionId","Mcountry.id": "countryId"}, columnNames=["cityName", "citySName", "stateId", "regionId", "countryId", "continentId","timezone"])[0]
 			data = [{"name": "Name", "value": data["cityName"], "var": "cityName"}, {"name": "Abbr", "value": data["citySName"], "var": "citySName"}, {"name": "State", "value": data["stateId"], "var": "stateId", "opts": makeSelectOpts("state", "region", data["regionId"], con=con)}, {"name": "Region", "value": data["regionId"], "var": "regionId", "opts": makeSelectOpts("region", "country", data["countryId"], con=con)}, {"name": "Country", "var": "countryId", "value": data["countryId"], "opts": makeSelectOpts("country", "continent", data["continentId"], con=con)}, {"name": "Continent", "var": "continentId", "value": data["continentId"], "opts": makeSelectOpts("continent", con=con)},{"name": "Timezone", "var": "timezone", "value": data["timezone"], "opts": zones}]
 			data = {"data": data, "col": ["cityName", "citySName", "stateId", "regionId", "countryId", "continentId","timezone"],"token":requestToken(con)}
 		else:
-			data = con.getTable("Mcity,Mstate,Mregion,Mcountry,Mcontinent", ["cityName","citySName","stateName", "regionName", "countryName", "continentName","timezone"], where={"Mcity.id": id}, join={"Mcity.stateId": "Mstate.id","Mstate.regionId": "Mregion.id", "Mregion.countryId": "Mcountry.id", "Mcountry.continentId": "Mcontinent.id"})[0]
+			data = con.getTable("Mcity,Mstate,Mregion,Mcountry,Mcontinent", ["cityName","citySName","stateName", "regionName", "countryName", "continentName","timezone"], where={"Mcity.id": id}, join={"stateId": "Mstate.id","regionId": "Mregion.id", "countryId": "Mcountry.id", "continentId": "Mcontinent.id"})[0]
 			data = [{"name": "Name", "value": data["cityName"]}, {"name": "Abbr", "value": data["citySName"]},{"name": "State", "value": data["stateName"]}, {"name": "Region", "value": data["regionName"]}, {"name": "Country", "value": data["countryName"]}, {"name": "Continent", "value": data["continentName"]},{"name": "Timezone", "value": data["timezone"]}]
 	if kilcon:
 		con.close()
@@ -284,3 +284,8 @@ def saveEdit(tab,form,id):
 		resp=id
 	con.close()
 	return resp
+def deleteEntry(tab, id,token):
+	con = dbh.Connect()
+	if requestToken(id=token):
+		if id != 0:
+			print("todo")
