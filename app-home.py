@@ -28,7 +28,7 @@ def loadProfile():
 		edit=True
 	info=getTab[data["tab"]](id=data["id"],edit=edit)
 	if edit:
-		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html",data=info["data"],edit=edit,tab=data["tab"],id=data["id"])},{"method": "cacheProfileFields", "arg":info["col"]}]}}))
+		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html",data=info["data"],edit=edit,tab=data["tab"],id=data["id"])},{"method": "cacheProfileFields", "arg":info["col"]},{"method": "cacheToken", "arg": info["token"]}]}}))
 	else:
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg": render_template("profile.html",data=info,edit=edit,tab=data["tab"],id=data["id"])}]}}))
 
