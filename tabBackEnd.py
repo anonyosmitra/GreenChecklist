@@ -273,9 +273,10 @@ def newCity(form=None):
 		return id
 def saveEdit(tab,form,id):
 	con = dbh.Connect()
+	print(form)
 	resp= checkValidity(0, form, tab, con)
 	if resp == True:
-		cols = con.desc(["name"])
+		cols = con.desc(dbh.appendQuery("M%0",[tab.lower()]))
 		ins = {}
 		for i in cols:
 			if i["name"] in form:
