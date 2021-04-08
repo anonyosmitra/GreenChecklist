@@ -45,7 +45,7 @@ def makeSelectOpts(get, where=None,id=None, con=None):
 		where=""
 	else:
 		where={where + "Id": id}
-	data=con.getTable("M"+get,["M"+get+".id",get+"Name"],where,columnNames=["id","name"],ext="order by "+get+"Name")
+	data=con.getTable(dbh.appendQuery("M%0",[get.low()]),[dbh.appendQuery("M%0.id",[get.low()]),dbh.appendQuery("%0Name",[get.low()])],where,columnNames=["id","name"],ext=dbh.appendQuery("order by %0 Name",[get]))
 	if kilcon:
 		con.close()
 	return data
@@ -150,12 +150,12 @@ def getOptions(tab,var,val,con=None):
 		if con == None:
 			con = dbh.Connect()
 			kilcon = True
-		info += [{"var": sel[0].lower()+"Id", "opts": makeSelectOpts(sel[0].lower(), var, val, con) + [{"name": "Select %s" % (sel[0])}]}]
+		info += [{"var": dbh.appendQuery("%0Id",[sel[0].lower()]), "opts": makeSelectOpts(sel[0].lower(), var, val, con) + [{"name": "Select %s" % (sel[0])}]}]
 		if kilcon:
 			con.close()
 		if len(sel)>1:
 			for i in range(1,len(sel)):
-				info += [{"var": sel[i].lower()+"Id", "opts":[{"name":"Select %s First"%(sel[0])}]}]
+				info += [{"var": dbh.appendQuery("%0Id",[sel[0].lower()]), "opts":[{"name":"Select %s First"%(sel[0])}]}]
 	return info
 def getCityTab(id=None, query={}, con=None, edit=False):
 	kilcon = False
@@ -197,7 +197,7 @@ def checkValidity(id,data,tab,con=None):
 		if data[i]=="" or data[i]==None:
 			resp = "Empty value detected!"
 		if i[-4:]=="Code":
-			if len(con.getTable("M"+i[:-4],["id"],con.appendQuery("%0=\"%1\" and id!=%2",[i,data[i],id])))>0:
+			if len(con.getTable(dbh.appendQuery("M%0",[i[:-4]]),["id"],con.appendQuery("%0=\"%1\" and id!=%2",[i,data[i],id])))>0:
 				resp="%s code already exists and must be unique!"%(i[:-4].capilatize())
 	if kilcon:
 		con.close()
@@ -281,7 +281,7 @@ def saveEdit(tab,form,id):
 		for i in cols:
 			if i["name"] in form:
 				ins[i["name"]] = form[i["name"]]
-		con.updateTable("M"+tab, ins,{"id":id})
+		con.updateTable(dbh.appendQuery("M%0",[tab.lower()]), ins,{"id":id})
 		resp=id
 	con.close()
 	return resp
