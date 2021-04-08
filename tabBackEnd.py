@@ -16,7 +16,7 @@ def requestToken(con=None,id=None,):
 	if id==None:
 		resp=con.insertIntoTable("formHandler",{"memo":"ok"},returnId=True)
 	else:
-		resp=con.deleteFromTable("formHandler",{"id":id},returnCount=True)
+		resp=[False,True][con.deleteFromTable("formHandler",{"id":id},returnCount=True)]
 	if kilcon:
 		con.close()
 	return resp
