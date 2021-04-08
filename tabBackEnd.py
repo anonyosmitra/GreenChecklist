@@ -150,7 +150,7 @@ def getOptions(tab,var,val,con=None):
 		if con == None:
 			con = dbh.Connect()
 			kilcon = True
-		info += [{"var": dbh.appendQuery("%0Id",[sel[0].lower()]), "opts": makeSelectOpts(sel[0].lower(), var, val, con) + [{"name": "Select %s" % (sel[0])}]}]
+		info += [{"var": dbh.appendQuery("%0Id",[sel[0].lower()]), "opts": [{"name": "Select %s" % (sel[0])}]+makeSelectOpts(sel[0].lower(), var, val, con)}]
 		if kilcon:
 			con.close()
 		if len(sel)>1:
