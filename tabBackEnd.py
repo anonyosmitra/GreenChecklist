@@ -288,7 +288,8 @@ def saveEdit(tab,form,id,token):
 					ins[i["name"]] = form[i["name"]]
 			con.updateTable(dbh.appendQuery("M%0",[tab.lower()]), ins,{"id":id})
 			resp=id
-			print(resp)
+	else:
+		print("No")
 	con.close()
 	return resp
 def deleteEntry(tab, id,token):
