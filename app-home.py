@@ -53,6 +53,7 @@ def openTab():
 @app.route('/addNew', methods=['POST'])
 def addNew():
 	data = request.json
+	print(data)
 	if "form" in data:
 		id=newEntry[data["tab"]](data["form"])
 		if type(id)!=int:

@@ -262,7 +262,7 @@ def newCity(form=None):
 	else:
 		con=dbh.Connect()
 		id=checkValidity(0,form,"City",con)
-		if id==True:
+		if id==True and :
 			cols=con.desc(["name"])
 			ins={}
 			for i in cols:
