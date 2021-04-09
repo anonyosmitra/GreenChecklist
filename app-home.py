@@ -77,6 +77,11 @@ def saveEdit():
 @app.route('/deleteEntry', methods=['POST'])
 def deleteEntry():
 	data = request.json
+	resp=tbe.deleteEntry(data["tab"],data["id"],data["token"])
+	if resp==True:
+		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "fillProfile", "arg":""}]}}))
+	else:
+		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": resp}]}}))
 
 
 if __name__ == '__main__':

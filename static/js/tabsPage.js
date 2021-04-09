@@ -31,6 +31,7 @@ var getApp = new XMLHttpRequest();
 var methods={}
 function selTab(args)
 {
+    fillProfile("");
     tabs=["Country","Region","State","City"];
  if(tabs.includes(args))
  {

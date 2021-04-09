@@ -298,6 +298,17 @@ def saveEdit(tab,form,id,token):
 	return resp
 def deleteEntry(tab, id,token):
 	con = dbh.Connect()
-	if requestToken(id=token):
-		if id != 0:
-			print("todo")
+	sel = ['Country', 'Region', 'State', 'City']
+	resp="Invalid Table"
+	if tab in sel:
+		resp = True
+		if sel.index(tab) + 1 < len(sel):
+			if len(con.getTable(dbh.appendQuery("M%0",[sel[sel.index(tab) + 1].lower()]),["id"],{dbh.appendQuery("%0Id",[tab])}))>0:
+				resp = dbh.appendQuery("Select %0 has dependent entries", [tab.lower()])
+			else:
+				if requestToken(con,token):
+					con.deleteFromTable(dbh.appendQuery("M%0",[tab.lower()]),{"id":id})
+					resp=True
+	con.close()
+	return resp
+
