@@ -303,7 +303,7 @@ def deleteEntry(tab, id,token):
 	if tab in sel:
 		resp = True
 		if sel.index(tab) + 1 < len(sel):
-			if len(con.getTable(dbh.appendQuery("M%0",[sel[sel.index(tab) + 1].lower()]),["id"],{dbh.appendQuery("%0Id",[tab])}))>0:
+			if len(con.getTable(dbh.appendQuery("M%0",[sel[sel.index(tab) + 1].lower()]),["id"],{dbh.appendQuery("%0Id",[tab]):id}))>0:
 				resp = dbh.appendQuery("Select %0 has dependent entries", [tab.lower()])
 			else:
 				if requestToken(con,token):
