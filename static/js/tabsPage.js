@@ -158,5 +158,5 @@ function submitForm(id)
     }
 function deleteEntry(id)
     {
-        POST({"id":id,"tab":cache["tabName"]},"deleteEntry","token":cache["token"]);
+        POST({"id":id,"tab":cache["tabName"],"token":cache["token"]},"deleteEntry");
     }
