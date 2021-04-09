@@ -301,14 +301,16 @@ def deleteEntry(tab, id,token):
 	sel = ['Country', 'Region', 'State', 'City']
 	resp="Invalid Table"
 	if tab in sel:
-		resp = True
-		if sel.index(tab) + 1 < len(sel):
-			if len(con.getTable(dbh.appendQuery("M%0",[sel[sel.index(tab) + 1].lower()]),["id"],{dbh.appendQuery("%0Id",[tab]):id}))>0:
-				resp = dbh.appendQuery("Select %0 has dependent entries", [tab.lower()])
+		resp = "ok"
+		if sel.index(tab.capitalize()) + 1 < len(sel):
+			if len(con.getTable(dbh.appendQuery("M%0",[sel[sel.index(tab.capitalize()) + 1].lower()]),["id"],{dbh.appendQuery("%0Id",[tab]):id}))>0:
+				resp = dbh.appendQuery("Selected %0 has dependent entries", [tab.lower()])
 			else:
 				if requestToken(con,token):
 					con.deleteFromTable(dbh.appendQuery("M%0",[tab.lower()]),{"id":id})
 					resp=True
+				else:
+					print("failed")
 	con.close()
 	return resp
 
