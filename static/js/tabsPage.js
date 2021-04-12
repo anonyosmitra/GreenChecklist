@@ -160,3 +160,8 @@ function deleteEntry(id)
     {
         POST({"id":id,"tab":cache["tabName"],"token":cache["token"]},"deleteEntry");
     }
+function clearSearchBar()
+{
+    document.getElementById("mainSearchBox).value="";
+    document.getElementById("clear").hidden=true;
+}
