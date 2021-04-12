@@ -21,7 +21,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
         <!-- Remove Tap Highlight on Windows Phone IE -->
         <meta name="msapplication-tap-highlight" content="no">
         <!-- base css -->
-        <link rel="stylesheet" media="screen, print" href=="{{url_for('static', filename='css/vendors.bundle.css')}}">
+        <link rel="stylesheet" media="screen, print" href="{{url_for('static', filename='css/vendors.bundle.css')}}">
         <link rel="stylesheet" media="screen, print" href="{{url_for('static', filename='css/app.bundle.css')}}">
         <!-- Place favicon.ico in the root directory -->
         <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='img/favicon/apple-touch-icon.png')}}">
@@ -110,7 +110,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                             </div>
                         </div>
                         <div class="info-card">
-                            <img src="img/company-logo.png" class="img-fluid comlogo" aria-roledescription="logo">
+                            <img src="{{url_for('static', filename='img/company-logo.png')}}" class="img-fluid comlogo" aria-roledescription="logo">
 
 
                             <a href="#" onclick="return false;" class="pull-trigger-btn" data-action="toggle" data-class="list-filter-active" data-target=".page-sidebar" data-focus="nav_filter_input">
@@ -1010,7 +1010,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     <header class="page-header" role="banner">
                         <!-- we need this logo when user switches to nav-function-top -->
                         <div class="page-logo">
-                          <img src="img/logored.png" class="img-fluid logo" alt="SmartAdmin WebApp" aria-roledescription="logo">
+                          <img src="{{url_for('static', filename='img/logored.png')}}" class="img-fluid logo" alt="SmartAdmin WebApp" aria-roledescription="logo">
                         </div>
                         <!-- DOC: nav menu layout change shortcut -->
                         <div class="hidden-md-down dropdown-icon-menu position-relative">
@@ -1060,7 +1060,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                             <!-- app user menu -->
                             <div>
                                 <a href="#" data-toggle="dropdown" title="drlantern@gotbootstrap.com" class="header-icon d-flex align-items-center justify-content-center ml-2">
-                                    <img src="img/demo/avatars/avatar-admin.png" class="profile-image rounded-circle" alt="Dr. Codex Lantern">
+                                    <img src="{{url_for('static', filename='img/demo/avatars/avatar-admin.png')}}" class="profile-image rounded-circle" alt="Dr. Codex Lantern">
                                     <!-- you can also add username next to the avatar with the codes below:
 									<span class="ml-1 mr-1 text-truncate text-truncate-header hidden-xs-down">Me</span>
 									<i class="ni ni-chevron-down hidden-xs-down"></i> -->
@@ -1069,7 +1069,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                     <div class="dropdown-header bg-trans-gradient d-flex flex-row py-4 rounded-top">
                                         <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                                             <span class="mr-2">
-                                                <img src="img/demo/avatars/avatar-admin.png" class="rounded-circle profile-image" alt="Dr. Codex Lantern">
+                                                <img src="{{url_for('static', filename='img/demo/avatars/avatar-admin.png')}}" class="rounded-circle profile-image" alt="Dr. Codex Lantern">
                                             </span>
                                             <div class="info-card-text">
                                                 <div class="fs-lg text-truncate text-truncate-lg">Dr. Vengayam</div>
@@ -1719,7 +1719,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                     <div class="dropdown-header bg-trans-gradient d-flex align-items-center w-100">
                         <div class="d-flex flex-row align-items-center mt-1 mb-1 color-white">
                             <span class="mr-2">
-                                <span class="rounded-circle profile-image d-block" style="background-image:url('img/demo/avatars/avatar-d.png'); background-size: cover;"></span>
+                                <span class="rounded-circle profile-image d-block" style="background-image:url('{{url_for('static', filename='img/demo/avatars/avatar-d.png')}}'); background-size: cover;"></span>
                             </span>
                             <div class="info-card-text">
                                 <a href="javascript:void(0);" class="fs-lg text-truncate text-truncate-lg text-white" data-toggle="dropdown" aria-expanded="false">
@@ -1753,7 +1753,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                         <li>
                                             <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="tracey chang online">
                                                 <div class="d-table-cell align-middle status status-success status-sm ">
-                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('img/demo/avatars/avatar-d.png'); background-size: cover;"></span>
+                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('{{url_for('static', filename='img/demo/avatars/avatar-d.png')}}'); background-size: cover;"></span>
                                                 </div>
                                                 <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                                     <div class="text-truncate text-truncate-md">
@@ -1768,7 +1768,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                         <li>
                                             <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="oliver kopyuv online">
                                                 <div class="d-table-cell align-middle status status-success status-sm ">
-                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('img/demo/avatars/avatar-b.png'); background-size: cover;"></span>
+                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('{{url_for('static', filename='img/demo/avatars/avatar-b.png')}}'); background-size: cover;"></span>
                                                 </div>
                                                 <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                                     <div class="text-truncate text-truncate-md">
@@ -1783,7 +1783,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                         <li>
                                             <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="dr john cook phd away">
                                                 <div class="d-table-cell align-middle status status-warning status-sm ">
-                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('img/demo/avatars/avatar-e.png'); background-size: cover;"></span>
+                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('{{url_for('static', filename='img/demo/avatars/avatar-e.png')}}'); background-size: cover;"></span>
                                                 </div>
                                                 <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                                     <div class="text-truncate text-truncate-md">
@@ -1798,7 +1798,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                         <li>
                                             <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="ali amdaney online">
                                                 <div class="d-table-cell align-middle status status-success status-sm ">
-                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('img/demo/avatars/avatar-g.png'); background-size: cover;"></span>
+                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('{{url_for('static', filename='img/demo/avatars/avatar-g.png')}}'); background-size: cover;"></span>
                                                 </div>
                                                 <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                                     <div class="text-truncate text-truncate-md">
@@ -1813,7 +1813,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                         <li>
                                             <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="sarah mcbrook online">
                                                 <div class="d-table-cell align-middle status status-success status-sm">
-                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('img/demo/avatars/avatar-h.png'); background-size: cover;"></span>
+                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('{{url_for('static', filename='img/demo/avatars/avatar-h.png')}}'); background-size: cover;"></span>
                                                 </div>
                                                 <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                                     <div class="text-truncate text-truncate-md">
@@ -1828,7 +1828,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                         <li>
                                             <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="ali amdaney offline">
                                                 <div class="d-table-cell align-middle status status-sm">
-                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('img/demo/avatars/avatar-a.png'); background-size: cover;"></span>
+                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('{{url_for('static', filename='img/demo/avatars/avatar-a.png')}}'); background-size: cover;"></span>
                                                 </div>
                                                 <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                                     <div class="text-truncate text-truncate-md">
@@ -1843,7 +1843,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                         <li>
                                             <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="ali amdaney busy">
                                                 <div class="d-table-cell align-middle status status-danger status-sm">
-                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('img/demo/avatars/avatar-j.png'); background-size: cover;"></span>
+                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('{{url_for('static', filename='img/demo/avatars/avatar-j.png')}}'); background-size: cover;"></span>
                                                 </div>
                                                 <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                                     <div class="text-truncate text-truncate-md">
@@ -1858,7 +1858,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                         <li>
                                             <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="ali amdaney offline">
                                                 <div class="d-table-cell align-middle status status-sm">
-                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('img/demo/avatars/avatar-c.png'); background-size: cover;"></span>
+                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('{{url_for('static', filename='img/demo/avatars/avatar-c.png')}}'); background-size: cover;"></span>
                                                 </div>
                                                 <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                                     <div class="text-truncate text-truncate-md">
@@ -1873,7 +1873,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                                         <li>
                                             <a href="#" class="d-table w-100 px-2 py-2 text-dark hover-white" data-filter-tags="ali amdaney inactive">
                                                 <div class="d-table-cell align-middle">
-                                                    <span class="profile-image-md rounded-circle d-block" style="background-image:url('img/demo/avatars/avatar-m.png'); background-size: cover;"></span>
+                                                    <span class="profile-image-md rounded-circle d-block" style="background-imageurl('{{url_for('static', filename='img/demo/avatars/avatar-m.png')}}'); background-size: cover;"></span>
                                                 </div>
                                                 <div class="d-table-cell w-100 align-middle pl-2 pr-2">
                                                     <div class="text-truncate text-truncate-md">
