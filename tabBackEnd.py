@@ -277,7 +277,7 @@ def newCity(form=None,token=None):
 		return id
 def saveEdit(tab,form,id,token):
 	con = dbh.Connect()
-	resp= checkValidity(0, form, tab, con)
+	resp= checkValidity(id, form, tab, con)
 	print(resp)
 	if resp == True:
 		print("Yes")
