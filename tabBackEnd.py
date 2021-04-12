@@ -198,7 +198,7 @@ def checkValidity(id,data,tab,con=None):
 			resp = "Empty value detected!"
 		if i[-4:]=="Code":
 			if len(con.getTable(dbh.appendQuery("M%0",[i[:-4]]),["id"],con.appendQuery("%0=\"%1\" and id!=%2",[i,data[i],id])))>0:
-				resp="%s code already exists and must be unique!"%(i[:-4].capilatize())
+				resp="%s code already exists and must be unique!"%(i[:-4].capitalize())
 	if kilcon:
 		con.close()
 	return resp
