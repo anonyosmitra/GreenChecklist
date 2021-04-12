@@ -29,7 +29,7 @@ keys=table keys
 </head>
 <body onload="tabsPage_init()" >
 <div style="display:inline-block;width:50%;background-color:red;" id="mainFrame">
-    <!--{{%set tabs=["Country","Region","State","City"]%}
+    <!--{%set tabs=["Country","Region","State","City"]%}
     {%for i in tabs%}
     <div id="tab_{{i}}" class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab('{{i}}')">{{i}}</div>
     {%endfor%}
@@ -39,7 +39,7 @@ keys=table keys
         <button class="clearButt" id="clear" onclick="clearSearchBar()" hidden>✕</button>
     </div><i class="fa fa-search tabButton highlight" onclick="search()"></i><i class="fa fa-plus tabButton highlight" onclick="addNew()"></i>
     <table id="tabEntries" class="table">
-        {result|safe}}
+        {{result|safe}}
     </table>
 </div>-->test</div>
 <div style="float:right;width:20%;background-color:yellow;" id="profileTab">test{{profile|safe}}</div>
