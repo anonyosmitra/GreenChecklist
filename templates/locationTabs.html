@@ -33,15 +33,18 @@ keys=table keys
     {%for i in tabs%}
     <div id="tab_{{i}}" class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab('{{i}}')">{{i}}</div>
     {%endfor%}
-<div class="resultTab">
- <div class="mainSearchBox">
-        <input class="mainSearchBox" id="mainSearchBox">
-        <button class="clearButt" id="clear" onclick="clearSearchBar()" hidden>✕</button>
-    </div><i class="fa fa-search tabButton highlight" onclick="search()"></i><i class="fa fa-plus tabButton highlight" onclick="addNew()"></i>
-    <table id="tabEntries" class="table">
-        {{result|safe}}
-    </table>
-</div></div>
+    <div class="resultTab">
+        <div class="mainSearchBox">
+            <input class="mainSearchBox" id="mainSearchBox">
+            <button class="clearButt" id="clear" onclick="clearSearchBar()" hidden>✕</button>
+        </div>
+        <i class="fa fa-search tabButton highlight" onclick="search()"></i>
+        <i class="fa fa-plus tabButton highlight" onclick="addNew()"></i>
+        <table id="tabEntries" class="table">
+            table here
+        </table>
+    </div>
+</div>
 <div style="display:inline-block;width:20%;background-color:yellow;" id="profileTab">test{{profile|safe}}</div>
 </body>
 </html>
