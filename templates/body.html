@@ -21,13 +21,12 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
         <!-- Remove Tap Highlight on Windows Phone IE -->
         <meta name="msapplication-tap-highlight" content="no">
         <!-- base css -->
-        <link rel="stylesheet" media="screen, print" href="css/vendors.bundle.css">
-        <link rel="stylesheet" media="screen, print" href="css/app.bundle.css">
+        <link rel="stylesheet" media="screen, print" href=="{{url_for('static', filename='css/vendors.bundle.css')}}">
+        <link rel="stylesheet" media="screen, print" href="{{url_for('static', filename='css/app.bundle.css')}}">
         <!-- Place favicon.ico in the root directory -->
-        <link rel="apple-touch-icon" sizes="180x180" href="img/favicon/apple-touch-icon.png">
-        <link rel="icon" type="image/png" sizes="32x32" href="img/favicon/favicon-32x32.png">
-        <link rel="mask-icon" href="img/favicon/safari-pinned-tab.svg" color="#5bbad5">
-        <link rel="stylesheet" media="screen, print" href="css/datagrid/datatables/datatables.bundle.css">
+        <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='img/favicon/apple-touch-icon.png')}}">
+        <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='img/favicon/favicon-32x32.png')}}">
+        <link rel="mask-icon" href="{{url_for('static', filename='img/favicon/safari-pinned-tab.svg')}}" color="#5bbad5">
     </head>
     <body class="mod-bg-1 ">
         <!-- DOC: script to save and load page settings -->
@@ -97,7 +96,7 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
                 <aside class="page-sidebar">
                     <div class="page-logo">
                         <a href="#" class="page-logo-link press-scale-down d-flex align-items-center position-relative">
-                            <img src="img/logo.png" class="img-fluid logo" alt="SmartAdmin WebApp" aria-roledescription="logo">
+                            <img src="{{url_for('static', filename='img/logo.png')}}" class="img-fluid logo" alt="SmartAdmin WebApp" aria-roledescription="logo">
                         </a>
                     </div>
                     <!-- BEGIN PRIMARY NAVIGATION -->
@@ -2260,8 +2259,8 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 						+ waves.js (extension)
 						+ smartpanels.js (extension)
 						+ src/../jquery-snippets.js (core) -->
-        <script src="js/vendors.bundle.js"></script>
-        <script src="js/app.bundle.js"></script>
+        <script src="{{url_for('static', filename='js/vendors.bundle.js')}}"></script>
+        <script src="{{url_for('static', filename='js/app.bundle.js')}}"></script>
         <!-- datatble responsive bundle contains:
 	+ jquery.dataTables.js
 	+ dataTables.bootstrap4.js
@@ -2282,7 +2281,6 @@ License: You must have a valid license purchased only from wrapbootstrap.com (li
 	+ dataTables.select.js
 	+ datatables.styles.app.js
 	+ datatables.styles.buttons.app.js -->
-        <script src="js/datagrid/datatables/datatables.bundle.js"></script>
         <script>
             $(document).ready(function()
             {
