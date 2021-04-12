@@ -162,6 +162,6 @@ function deleteEntry(id)
     }
 function clearSearchBar()
 {
-    document.getElementById("mainSearchBox).value="";
+    document.getElementById("mainSearchBox").value="";
     document.getElementById("clear").hidden=true;
 }
