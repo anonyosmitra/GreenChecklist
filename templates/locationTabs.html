@@ -29,7 +29,7 @@ keys=table keys
 </head>
 <body onload="tabsPage_init()" >
 <div style="width:100%">
-<div style="display:inline-block;width:40%;background-color:red;" id="mainFrame">
+<div style="display:inline-block;width:40%;" id="mainFrame">
     {%set tabs=["Country","Region","State","City"]%}
     {%for i in tabs%}
     <div id="tab_{{i}}" class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab('{{i}}')">{{i}}</div>
@@ -46,6 +46,6 @@ keys=table keys
         </table>
     </div>
 </div>
-<div style="display:inline-block;width:10%;background-color:yellow;" id="profileTab">test{{profile|safe}}</div></div>
+<div style="display:inline-block;width:10%;" id="profileTab">{{profile|safe}}</div></div>
 </body>
 </html>
