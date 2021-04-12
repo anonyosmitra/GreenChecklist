@@ -29,7 +29,7 @@ keys=table keys
 </head>
 <body onload="tabsPage_init()" >
 <div style="width:100%">
-<div style="display:inline-block;width:40%;" id="mainFrame">
+<div style="display:inline-block;width:60%;" id="mainFrame">
     {%set tabs=["Country","Region","State","City"]%}
     {%for i in tabs%}
     <div id="tab_{{i}}" class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab('{{i}}')">{{i}}</div>
