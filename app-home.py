@@ -15,6 +15,12 @@ newEntry={"Country":tbe.newCountry,"Region":tbe.newRegion,"State":tbe.newState,"
 application = app = Flask(__name__)
 CORS(app)
 
+@app.route('/home', methods=['GET'])
+def home():
+	data=getTab["Country"]()
+	return render_template("tabTemp.html",columns=data["cols"],keys=data["keys"],data=data["data"])
+	#return render_template("body.html",html=render_template("locationTabs.html",sel="Country",result=tab,keys=data["keys"],profile=""))
+
 @app.route('/', methods=['GET'])
 def home():
 	data=getTab["Country"]()
