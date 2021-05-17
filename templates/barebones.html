@@ -1,0 +1,52 @@
+<!--
+Variables:
+result=table
+sel=selected tab name(Country/State/City)
+keys=table keys
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600,700" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link href="{{url_for('static', filename='css/normalize.css')}}" rel="stylesheet">
+    <link href="{{url_for('static', filename='css/tabsPage.css')}}" rel="stylesheet">
+    <script src="{{url_for('static', filename='js/tabsPage.js')}}"></script>
+    <script>
+        var cache={};
+        cache["keys"]=[];
+        {%for i in keys%}
+        cache["keys"][cache["keys"].length]="{{i}}"
+        {%endfor%}
+        cache["tabName"]="{{sel}}";
+        function init_enters(){
+        for(i in cache["keys"])
+        onEnter({"div":"search_"+cache["keys"][i],"fun":"search","arg":cache["keys"][i]})
+        }
+    </script>
+</head>
+<body onload="tabsPage_init()" >
+<div style="width:100%">
+<div style="display:inline-block;width:60%;" id="mainFrame">
+    {%set tabs=["Country","Region","State","City"]%}
+    {%for i in tabs%}
+    <div id="tab_{{i}}" class="tabButton{%if i==sel%} highlight{%endif%}" onclick="tabsPage_openTab('{{i}}')">{{i}}</div>
+    {%endfor%}
+    <div class="resultTab">
+        <div class="mainSearchBox">
+            <input class="mainSearchBox" id="mainSearchBox">
+            <button class="clearButt" id="clear" onclick="clearSearchBar()" hidden>✕</button>
+        </div>
+        <i class="fa fa-search tabButton highlight" onclick="search()"></i>
+        <i class="fa fa-plus tabButton highlight" onclick="addNew()"></i>
+        <table id="tabEntries" class="table">
+            {{result|safe}}
+        </table>
+    </div>
+</div>
+<div style="display:inline-block;width:25%;" id="profileTab">{{profile|safe}}</div></div>
+</body>
+</html>
