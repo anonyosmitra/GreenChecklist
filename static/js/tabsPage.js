@@ -2,6 +2,7 @@ function tabsPage_init(){
     onEnter({"div":"mainSearchBox","fun":"search","keyD":"moveClearButton"})
     init_enters();
     console.log("tabsPage.js loaded.")
+    POST({"tab":"Country"},"openTab")
 }
 function tabsPage_openTab(tabName){
     tabs=["Country","Region","State","City"];

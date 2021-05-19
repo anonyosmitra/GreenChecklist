@@ -17,8 +17,9 @@ CORS(app)
 
 @app.route('/home', methods=['GET'])
 def barebones():
-	data=getTab["Country"]()
-	return render_template("locationTabs.html",sel="Country",result=render_template("tabTemp.html",columns=data["cols"],keys=data["keys"],data=data["data"]),keys=data["keys"],profile="")
+
+	#data=getTab["Country"]()
+	return render_template("locationTabs.html",sel="Country",result="",keys=[],profile="")
 	#return render_template("body.html",html=render_template("locationTabs.html",sel="Country",result=tab,keys=data["keys"],profile=""))
 
 @app.route('/', methods=['GET'])
