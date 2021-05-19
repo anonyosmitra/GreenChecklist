@@ -1,4 +1,5 @@
 import json
+import sys
 import traceback
 
 import requests
@@ -115,18 +116,20 @@ def deleteEntry():
 
 @app.route('/test', methods=['GET'])
 def test():
-	try:
 		a = ["test"]
 		flash(a)
 		return a[1]
-	except Exception as ex:
-		return(logError(ex),500)
 
 @app.errorhandler(404)
 def http404(ex):
 	# toFile(ex)
 	return "Unknown Router", 404
 
+@app.errorhandler(500)
+def internal_error(exception):
+    print("500 error caught")
+    etype, value, tb = sys.exc_info()
+    print(traceback.print_exception(etype, value, tb))
 def logError(ex):
 	global version
 	print(traceback.format_tb(ex.__traceback__))
