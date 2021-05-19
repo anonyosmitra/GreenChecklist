@@ -3,7 +3,7 @@ import requests
 from flask import Flask, render_template, request, jsonify, send_file,json
 from flask_cors import CORS
 import tabBackEnd as tbe
-from werkzeug.exceptions import HTTPException
+import logging
 from traceback import format_exception
 
 import arraylizer as arr
@@ -103,21 +103,10 @@ def http404(ex):
 		return ("Unknown Router",404)
 
 
-@app.errorhandler(HTTPException)
-def handle_exception(e):
-    # start with the correct headers and status code from the error
-    response = e.get_response()
-    # replace the body with JSON
-    response.data = json.dumps({
-        "code": e.code,
-        "name": e.name,
-        "description": e.description,
-    })
-    response.content_type = "application/json"
-    return response
 
 #def toFile(e)
 if __name__ == '__main__':
-    app.secret_key = 'password'
-    app.debug = True
-    app.run(host='0.0.0.0',port=80,threaded=True)
+	app.secret_key = 'password'
+	app.debug = True
+	logging.basicConfig(filename='error.log', level=logging.DEBUG)
+	app.run(host='0.0.0.0',port=80,threaded=True)
