@@ -129,9 +129,6 @@ def http404(ex):
 	# toFile(ex)
 	return "Unknown Router", 404
 
-@app.errorhandler(500)
-def handle_internal_server_error(e):
-	return render_template('500'), 500
 
 
 
