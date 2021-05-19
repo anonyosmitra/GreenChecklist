@@ -2,7 +2,7 @@ import json
 import requests
 from flask import Flask, render_template, request, jsonify, send_file,json
 from flask_cors import CORS
-from werkzeug.exceptions import InternalServerError
+from werkzeug.exceptions import InternalServerError, HTTPException
 
 import tabBackEnd as tbe
 import logging
@@ -104,17 +104,19 @@ def http404(ex):
 		#toFile(ex)
 		return ("Unknown Router",404)
 
-@app.errorhandler(InternalServerError)
-def handle_500(e):
-	original = getattr(e, "original_exception", None)
-	print(e)
-	print(original)
-	if original is None:
-		# direct 500 error, such as abort(500)
-		return render_template("500.html"), 500
-
-	# wrapped unhandled error
-	return render_template("500_unhandled.html", e=original), 500
+@app.errorhandler(HTTPException)
+def handle_exception(e):
+    """Return JSON instead of HTML for HTTP errors."""
+    # start with the correct headers and status code from the error
+    response = e.get_response()
+    # replace the body with JSON
+    response.data = json.dumps({
+        "code": e.code,
+        "name": e.name,
+        "description": e.description,
+    })
+    response.content_type = "application/json"
+    return response
 
 #def toFile(e)
 if __name__ == '__main__':
