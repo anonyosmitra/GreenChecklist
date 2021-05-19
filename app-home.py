@@ -121,8 +121,7 @@ def internal_error(exception):
 @app.errorhandler(Exception)
 def handle_exception(e):
     # pass through HTTP errors. You wouldn't want to handle these generically.
-    logError(e)
-    return "Error", 500
+    return logError(e), 500
 
 @app.route('/test', methods=['GET'])
 def test():
