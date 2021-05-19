@@ -120,16 +120,17 @@ def test():
 		flash(a)
 		return a[1]
 	except Exception as ex:
-		print(traceback.format_tb(ex.__traceback__))
-		print(ex)
-		return "error"
+		return(logError(ex),500)
 
 @app.errorhandler(404)
 def http404(ex):
 	# toFile(ex)
 	return "Unknown Router", 404
 
-
+def logError(ex):
+	print(traceback.format_tb(ex.__traceback__))
+	print(ex)
+	return str(ex)
 
 
 # def toFile(e)
