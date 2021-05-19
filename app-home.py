@@ -22,7 +22,6 @@ CORS(app)
 f=open(".git/refs/heads/master", "r")
 version=f.read()[:-1]
 f.close()
-print("Starting App Version: %s" % version)
 
 
 @app.route('/home', methods=['GET'])
@@ -129,10 +128,9 @@ def http404(ex):
 	# toFile(ex)
 	return "Unknown Router", 404
 
-@app.errorhandler(InternalServerError)
-def http404(ex):
-	# toFile(ex)
-	return "500", 500
+@app.errorhandler(500)
+def handle_internal_server_error(e):
+    return render_template('500'), 500
 
 
 
@@ -140,4 +138,5 @@ def http404(ex):
 if __name__ == '__main__':
 	app.secret_key = 'password'
 	app.debug = True
+	print("Starting App Version: %s" % version)
 	app.run(host='0.0.0.0', port=80, threaded=True)
