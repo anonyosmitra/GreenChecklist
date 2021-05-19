@@ -1,4 +1,6 @@
 import json
+import traceback
+
 import requests
 from flask import Flask, render_template, request, jsonify, send_file, json,flash
 from flask_cors import CORS
@@ -15,7 +17,11 @@ import ssl, socket
 
 getTab = {"Country": tbe.getCountryTab, "Region": tbe.getRegionTab, "State": tbe.getStateTab, "City": tbe.getCityTab}
 newEntry = {"Country": tbe.newCountry, "Region": tbe.newRegion, "State": tbe.newState, "City": tbe.newCity}
-application = app = Flask(__name__)
+try:
+	application = app = Flask(__name__)
+except Exception as ex:
+	print(traceback.format_tb(ex.__traceback__))
+	print(ex)
 CORS(app)
 
 
@@ -110,9 +116,12 @@ def deleteEntry():
 
 @app.route('/test', methods=['GET'])
 def test():
-	a = ["test"]
-	flash(a)
-	return a[1]
+	try:
+		a = ["test"]
+		flash(a)
+		return a[1]
+	except(ex):
+		raise Exception("foo occurred").with_traceback(ex)
 
 
 @app.errorhandler(404)
@@ -124,6 +133,7 @@ def http404(ex):
 def http404(ex):
 	# toFile(ex)
 	return "500", 500
+
 
 
 # def toFile(e)
