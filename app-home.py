@@ -17,11 +17,7 @@ import ssl, socket
 
 getTab = {"Country": tbe.getCountryTab, "Region": tbe.getRegionTab, "State": tbe.getStateTab, "City": tbe.getCityTab}
 newEntry = {"Country": tbe.newCountry, "Region": tbe.newRegion, "State": tbe.newState, "City": tbe.newCity}
-try:
-	application = app = Flask(__name__)
-except Exception as ex:
-	print(traceback.format_tb(ex.__traceback__))
-	print(ex)
+application = app = Flask(__name__)
 CORS(app)
 
 
@@ -120,9 +116,9 @@ def test():
 		a = ["test"]
 		flash(a)
 		return a[1]
-	except(ex):
-		raise Exception("foo occurred").with_traceback(ex)
-
+	except Exception as ex:
+		print(traceback.format_tb(ex.__traceback__))
+		print(ex)
 
 @app.errorhandler(404)
 def http404(ex):
