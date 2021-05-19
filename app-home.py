@@ -113,11 +113,25 @@ def deleteEntry():
 	else:
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": resp}]}}))
 
-@app.errorhandler(500)
+"""
 def internal_error(exception):
     print("500 error caught")
     etype, value, tb = sys.exc_info()
-    print(traceback.print_exception(etype, value, tb))
+    print(traceback.print_exception(etype, value, tb))"""
+
+@app.errorhandler(HTTPException)
+def handle_exception(e):
+    """Return JSON instead of HTML for HTTP errors."""
+    # start with the correct headers and status code from the error
+    response = e.get_response()
+    # replace the body with JSON
+    response.data = json.dumps({
+        "code": e.code,
+        "name": e.name,
+        "description": e.description,
+    })
+    response.content_type = "application/json"
+    return response
 
 @app.route('/test', methods=['GET'])
 def test():
