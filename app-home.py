@@ -129,7 +129,7 @@ def http404(ex):
 @app.errorhandler(Exception)
 def handle_exception(ex,html=False):
 	global version
-	print(ex.__traceback__)
+	print(traceback.format_tb(ex.__traceback__))
 	if html:
 		return ("<title></title><h1>Internal Server Error</h1><br><b>Please report to your system admin referring:<br><b>Process Id %s</b>" % (str(id))),500
 	else:
