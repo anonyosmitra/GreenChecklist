@@ -130,13 +130,18 @@ def http404(ex):
 
 @app.errorhandler(500)
 def handle_internal_server_error(e):
-    return render_template('500'), 500
+	return render_template('500'), 500
 
 
 
 # def toFile(e)
-if __name__ == '__main__':
-	app.secret_key = 'password'
-	app.debug = True
-	print("Starting App Version: %s" % version)
-	app.run(host='0.0.0.0', port=80, threaded=True)
+try:
+	if __name__ == '__main__':
+		app.secret_key = 'password'
+		app.debug = True
+		app.run(host='0.0.0.0', port=80, threaded=True)
+		print("Starting App Version: %s" % version)
+except Exception as ex:
+	print(traceback.format_tb(ex.__traceback__))
+	print(ex)
+print("print here")
