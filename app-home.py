@@ -108,5 +108,5 @@ def http404(ex):
 if __name__ == '__main__':
 	app.secret_key = 'password'
 	app.debug = True
-	logging.basicConfig(filename='error.log', level=logging.DEBUG)
+	logging.basicConfig(filename='error.log', level=logging.ERROR)
 	app.run(host='0.0.0.0',port=80,threaded=True)
