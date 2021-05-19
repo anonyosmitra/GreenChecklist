@@ -126,8 +126,8 @@ def http404(ex):
 	# toFile(ex)
 	return "Unknown Router", 404
 
-@app.errorhandler(500,Exception)
-def handle_exception(code,html=False):
+@app.errorhandler(Exception)
+def handle_exception(html=False):
 	global version
 	id=0
 	if html:
