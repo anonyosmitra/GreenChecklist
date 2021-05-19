@@ -99,13 +99,12 @@ def test():
 	return a[1]
 @app.errorhandler(404)
 def http404(ex):
-		toFile(ex)
+		#toFile(ex)
 		return ("Unknown Router",404)
 
 
-@app.errorhandler(HTTPException)
+"""@app.errorhandler(HTTPException)
 def handle_exception(e):
-    """Return JSON instead of HTML for HTTP errors."""
     # start with the correct headers and status code from the error
     response = e.get_response()
     # replace the body with JSON
@@ -115,7 +114,7 @@ def handle_exception(e):
         "description": e.description,
     })
     response.content_type = "application/json"
-    return response
+    return response"""
 
 #def toFile(e)
 if __name__ == '__main__':
