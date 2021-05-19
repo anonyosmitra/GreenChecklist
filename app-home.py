@@ -113,15 +113,15 @@ def deleteEntry():
 	else:
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": resp}]}}))
 
-"""
 def internal_error(exception):
     print("500 error caught")
     etype, value, tb = sys.exc_info()
-    print(traceback.print_exception(etype, value, tb))"""
+    print(traceback.print_exception(etype, value, tb))
 
 @app.errorhandler(Exception)
 def handle_exception(e):
     # pass through HTTP errors. You wouldn't want to handle these generically.
+    internal_error(e)
     if isinstance(e, HTTPException):
         return e
 
