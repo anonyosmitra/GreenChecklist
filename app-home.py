@@ -98,6 +98,7 @@ def test():
 	return a[1]
 @app.errorhandler(404)
 def http404(ex):
+		print(ex)
 		return ("Unknown Router",404)
 
 
