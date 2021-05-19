@@ -2,6 +2,8 @@ import json
 import requests
 from flask import Flask, render_template, request, jsonify, send_file,json
 from flask_cors import CORS
+from werkzeug.exceptions import InternalServerError
+
 import tabBackEnd as tbe
 import logging
 from traceback import format_exception
@@ -102,11 +104,20 @@ def http404(ex):
 		#toFile(ex)
 		return ("Unknown Router",404)
 
+@app.errorhandler(InternalServerError)
+def handle_500(e):
+	original = getattr(e, "original_exception", None)
+	print(e)
+	print(original)
+	if original is None:
+		# direct 500 error, such as abort(500)
+		return render_template("500.html"), 500
 
+	# wrapped unhandled error
+	return render_template("500_unhandled.html", e=original), 500
 
 #def toFile(e)
 if __name__ == '__main__':
 	app.secret_key = 'password'
 	app.debug = True
-	logging.basicConfig(filename='error.log', level=logging.ERROR)
 	app.run(host='0.0.0.0',port=80,threaded=True)
