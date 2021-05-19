@@ -3,6 +3,7 @@ import requests
 from flask import Flask, render_template, request, jsonify, send_file
 from flask_cors import CORS
 import tabBackEnd as tbe
+from traceback import format_exception
 
 import arraylizer as arr
 import dbHandler as dbh
@@ -91,7 +92,19 @@ def deleteEntry():
 	else:
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": resp}]}}))
 
+@app.route('/test', methods=['POST'])
+def test():
+	a=["test"]
+	return a[1]
+@app.errorhandler(404)
+def http404():
+		return ("Unknown Router",404)
 
+
+@app.errorhandler(Exception)
+def http500(e):
+	print(e)
+	return ("500", 500)
 if __name__ == '__main__':
     app.secret_key = 'password'
     app.debug = True
