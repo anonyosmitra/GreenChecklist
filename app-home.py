@@ -3,7 +3,7 @@ import requests
 from flask import Flask, render_template, request, jsonify, send_file, json,flash
 from flask_cors import CORS
 import tabBackEnd as tbe
-from werkzeug.exceptions import HTTPException
+from werkzeug.exceptions import HTTPException, InternalServerError
 from traceback import format_exception
 
 import arraylizer as arr
@@ -120,7 +120,7 @@ def http404(ex):
 	# toFile(ex)
 	return "Unknown Router", 404
 
-@app.errorhandler(500)
+@app.errorhandler(InternalServerError)
 def http404(ex):
 	# toFile(ex)
 	return "500", 500
