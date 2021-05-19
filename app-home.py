@@ -93,7 +93,7 @@ def deleteEntry():
 	else:
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": resp}]}}))
 
-@app.route('/test', methods=['POST'])
+@app.route('/test', methods=['GET'])
 def test():
 	a=["test"]
 	return a[1]
