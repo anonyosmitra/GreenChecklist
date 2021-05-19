@@ -115,9 +115,14 @@ def deleteEntry():
 
 @app.route('/test', methods=['GET'])
 def test():
+	try:
 		a = ["test"]
 		flash(a)
 		return a[1]
+	except Exception as ex:
+		print(traceback.format_tb(ex.__traceback__))
+		print(ex)
+		return ex
 
 @app.errorhandler(404)
 def http404(ex):
@@ -131,13 +136,8 @@ def handle_internal_server_error(e):
 
 
 # def toFile(e)
-try:
-	if __name__ == '__main__':
-		app.secret_key = 'password'
-		app.debug = True
-		print("Starting App Version: %s" % version)
-		app.run(host='0.0.0.0', port=80, threaded=True)
-except Exception as ex:
-	print(traceback.format_tb(ex.__traceback__))
-	print(ex)
-print("print here")
+if __name__ == '__main__':
+	app.secret_key = 'password'
+	app.debug = True
+	print("Starting App Version: %s" % version)
+	app.run(host='0.0.0.0', port=80, threaded=True)
