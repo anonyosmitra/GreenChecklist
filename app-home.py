@@ -121,6 +121,11 @@ def handle_exception(e):
 	print(e)
 	print(version)
 	return "__InternalServerError__",500"""
+@app.errorhandler(404)
+def http404(ex):
+	# toFile(ex)
+	return "Unknown Router", 404
+
 @app.errorhandler(500,Exception)
 def handle_exception(code,html=False):
 	global version
@@ -143,10 +148,6 @@ def test():
 	a = ["test"]
 	flash(a)
 	return a[1]
-@app.errorhandler(404)
-def http404(ex):
-	# toFile(ex)
-	return "Unknown Router", 404
 
 
 
