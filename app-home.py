@@ -97,7 +97,7 @@ def test():
 	a=["test"]
 	return a[1]
 @app.errorhandler(404)
-def http404():
+def http404(ex):
 		return ("Unknown Router",404)
 
 
