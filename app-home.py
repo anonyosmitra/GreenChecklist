@@ -114,20 +114,35 @@ def deleteEntry():
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": resp}]}}))
 
 
-@app.errorhandler(Exception)
+"""@app.errorhandler(Exception)
 def handle_exception(e):
 	global version
 	print(traceback.format_tb(e.__traceback__))
 	print(e)
 	print(version)
-	return "__InternalServerError__",500
+	return "__InternalServerError__",500"""
+@app.errorhandler(Exception)
+def handle_exception(e,html=False):
+	global version
+	id=0
+	if html:
+		return ("<title></title><h1>Internal Server Error</h1><br><b>Please report to your system admin referring:<br><b>Process Id %s</b>" % (str(id))),200
+	else:
+		return jsonify({"reply": {"auth": 1, "reply": {"exe": [{"method": "displayError", "arg": {"msg": "Error Processing Request, Reference ID: %s" % (id)}}]}}}),500
 
-@app.route('/test', methods=['GET'])
-def test():
+@app.route('/html', methods=['GET'])
+def html():
+	try:
 		a = ["test"]
 		flash(a)
 		return a[1]
-
+	except Exception as ex:
+		return handle_exception(ex,True)
+@app.route('/json', methods=['GET'])
+def test():
+	a = ["test"]
+	flash(a)
+	return a[1]
 @app.errorhandler(404)
 def http404(ex):
 	# toFile(ex)
