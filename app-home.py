@@ -122,7 +122,7 @@ def test():
 	except Exception as ex:
 		print(traceback.format_tb(ex.__traceback__))
 		print(ex)
-		return ex
+		return(ex)
 
 @app.errorhandler(404)
 def http404(ex):
