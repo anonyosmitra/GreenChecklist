@@ -120,6 +120,11 @@ def http404(ex):
 	# toFile(ex)
 	return "Unknown Router", 404
 
+@app.errorhandler(500)
+def http404(ex):
+	# toFile(ex)
+	return "500", 500
+
 
 # def toFile(e)
 if __name__ == '__main__':
