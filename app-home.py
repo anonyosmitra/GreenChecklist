@@ -121,14 +121,14 @@ def handle_exception(e):
 	print(e)
 	print(version)
 	return "__InternalServerError__",500"""
-@app.errorhandler(Exception)
-def handle_exception(e,html=False):
+@app.errorhandler(500,Exception)
+def handle_exception(code,html=False):
 	global version
 	id=0
 	if html:
 		return ("<title></title><h1>Internal Server Error</h1><br><b>Please report to your system admin referring:<br><b>Process Id %s</b>" % (str(id))),500
 	else:
-		return jsonify({"reply": {"auth": 1, "reply": {"exe": [{"method": "displayError", "arg": {"msg": "Error Processing Request, Reference ID: %s" % (id)}}]}}}),200
+		return jsonify({"reply": {"auth": 1, "reply": {"exe": [{"method": "displayError", "arg": {"msg": "Error Processing Request, Process ID: %s" % (id)}}]}}}),200
 
 @app.route('/html', methods=['GET'])
 def html():
