@@ -19,6 +19,10 @@ getTab = {"Country": tbe.getCountryTab, "Region": tbe.getRegionTab, "State": tbe
 newEntry = {"Country": tbe.newCountry, "Region": tbe.newRegion, "State": tbe.newState, "City": tbe.newCity}
 application = app = Flask(__name__)
 CORS(app)
+f=open(".git/refs/heads/master", "r")
+version=f.read()[:-1]
+f.close()
+print("Starting App Version: %s" % version)
 
 
 @app.route('/home', methods=['GET'])
