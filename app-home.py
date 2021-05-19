@@ -128,9 +128,11 @@ def http404(ex):
 	return "Unknown Router", 404
 
 def logError(ex):
+	global version
 	print(traceback.format_tb(ex.__traceback__))
 	print(ex)
-	return str(ex)
+	print(version)
+	return "__InternalServerError__"
 
 
 # def toFile(e)
