@@ -113,15 +113,14 @@ def deleteEntry():
 	else:
 		return (jsonify({"reply": {"auth": 1, "exe": [{"method": "profileError", "arg": resp}]}}))
 
-def internal_error(exception):
-    print("500 error caught")
-    etype, value, tb = sys.exc_info()
-    print(traceback.print_exception(etype, value, tb))
 
 @app.errorhandler(Exception)
 def handle_exception(e):
-    # pass through HTTP errors. You wouldn't want to handle these generically.
-    return logError(e), 500
+	global version
+	print(traceback.format_tb(e.__traceback__))
+	print(e)
+	print(version)
+	return "__InternalServerError__",500
 
 @app.route('/test', methods=['GET'])
 def test():
@@ -134,12 +133,7 @@ def http404(ex):
 	# toFile(ex)
 	return "Unknown Router", 404
 
-def logError(ex):
-	global version
-	print(traceback.format_tb(ex.__traceback__))
-	print(ex)
-	print(version)
-	return "__InternalServerError__"
+
 
 
 # def toFile(e)
