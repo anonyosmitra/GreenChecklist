@@ -121,7 +121,7 @@ def internal_error(exception):
 @app.errorhandler(Exception)
 def handle_exception(e):
     # pass through HTTP errors. You wouldn't want to handle these generically.
-    internal_error(e)
+    logError(e)
     if isinstance(e, HTTPException):
         return e
 
